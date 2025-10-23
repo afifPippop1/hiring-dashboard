@@ -42,7 +42,16 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --color-neutral: var(--neutral);
+  --color-neutral-10: var(--neutral-10);
+  --color-neutral-20: var(--neutral-20);
+  --color-neutral-30: var(--neutral-30);
+  --color-neutral-40: var(--neutral-40);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-60: var(--neutral-60);
+  --color-neutral-70: var(--neutral-70);
+  --color-neutral-80: var(--neutral-80);
+  --color-neutral-90: var(--neutral-90);
+  --color-neutral-100: var(--neutral-100);
 
   --color-primary: var(--primary);
   --color-primary-surface: var(--primary-surface);
@@ -78,6 +87,10 @@
   --color-success-hover: var(--success-hover);
   --color-success-pressed: var(--success-pressed);
   --color-success-focus: var(--success-focus);
+
+  --shadow-input: 1px 2px 2px 0px #0000001f inset;
+  --shadow-button: 0px 1px 2px 0px #0000001f;
+  --shadow-modal: 0px 4px 8px 0px #0000001a;
 }
 
 :root {
@@ -89,7 +102,6 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -201,4 +213,32 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Typography */
+@utility text-xs {
+  @apply text-[0.625rem]/[1rem];
+}
+@utility text-s {
+  @apply text-[0.75rem]/[1.25rem];
+}
+@utility text-m {
+  @apply text-[0.875rem]/[1.5rem];
+}
+@utility text-l {
+  @apply text-[1rem]/[1.75rem];
+}
+
+@utility heading-s {
+  @apply text-[1.25rem]/[2rem];
+}
+@utility heading-m {
+  @apply text-[1.5rem]/[2.25rem];
+}
+@utility heading-l {
+  @apply text-[2rem]/[2.75rem];
+}
+
+@utility display {
+  @apply text-[3rem]/[4rem] font-bold;
 }

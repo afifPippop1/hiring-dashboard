@@ -59,7 +59,9 @@ export default function Home() {
           >
             Documentation
           </a>
-          <Button variant="outline">Hello world</Button>
+          <Button variant="secondary" size={"lg"} disabled>
+            Hello world
+          </Button>
         </div>
       </main>
     </div>
