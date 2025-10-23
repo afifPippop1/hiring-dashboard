@@ -59,7 +59,7 @@ export default function Home() {
           >
             Documentation
           </a>
-          <Button>Hello world</Button>
+          <Button variant="outline">Hello world</Button>
         </div>
       </main>
     </div>
