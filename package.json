@@ -1,0 +1,17 @@
+{
+  "name": "hiring-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "app",
+    "server"
+  ],
+  "scripts": {
+    "app:dev": "npm run dev --workspace=app",
+    "server:dev": "npm run dev --workspace=server",
+    "dev": "npm workspace run dev"
+  },
+  "author": "afifPippop1",
+  "license": "MIT"
+}
