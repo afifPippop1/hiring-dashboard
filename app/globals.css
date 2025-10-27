@@ -42,16 +42,16 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --color-neutral-10: var(--neutral-10);
-  --color-neutral-20: var(--neutral-20);
-  --color-neutral-30: var(--neutral-30);
-  --color-neutral-40: var(--neutral-40);
-  --color-neutral-50: var(--neutral-50);
-  --color-neutral-60: var(--neutral-60);
-  --color-neutral-70: var(--neutral-70);
-  --color-neutral-80: var(--neutral-80);
-  --color-neutral-90: var(--neutral-90);
-  --color-neutral-100: var(--neutral-100);
+  --color-neutral-10: #ffffff;
+  --color-neutral-20: #fafafa;
+  --color-neutral-30: #ededed;
+  --color-neutral-40: #e0e0e0;
+  --color-neutral-50: #c2c2c2;
+  --color-neutral-60: #9e9e9e;
+  --color-neutral-70: #757575;
+  --color-neutral-80: #616161;
+  --color-neutral-90: #404040;
+  --color-neutral-100: #1d1f20;
 
   --color-primary: var(--primary);
   --color-primary-surface: var(--primary-surface);
@@ -91,6 +91,25 @@
   --shadow-input: 1px 2px 2px 0px #0000001f inset;
   --shadow-button: 0px 1px 2px 0px #0000001f;
   --shadow-modal: 0px 4px 8px 0px #0000001a;
+
+  --text-xs: 0.625rem;
+  --text-xs--line-height: calc(1 / 0.625);
+  --text-sm: 0.75rem;
+  --text-sm--line-height: calc(1.25 / 0.75);
+  --text-md: 0.875rem;
+  --text-md--line-height: calc(1.5 / 0.875);
+  --text-lg: 1rem;
+  --text-lg--line-height: calc(1.75 / 1);
+
+  --text-heading-sm: 1.25rem;
+  --text-heading-sm--line-height: calc(2 / 1.25);
+  --text-heading-md: 1.5rem;
+  --text-heading-md--line-height: calc(2.25 / 1.5);
+  --text-heading-lg: 2rem;
+  --text-heading-lg--line-height: calc(2.75 / 2);
+
+  --text-display: 3rem;
+  --text-display--line-height: calc(4 / 3);
 }
 
 :root {
@@ -124,17 +143,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
-  --neutral-10: #ffffff;
-  --neutral-20: #fafafa;
-  --neutral-30: #ededed;
-  --neutral-40: #e0e0e0;
-  --neutral-50: #c2c2c2;
-  --neutral-60: #9e9e9e;
-  --neutral-70: #757575;
-  --neutral-80: #616161;
-  --neutral-90: #404040;
-  --neutral-100: #1d1f20;
 
   --primary: #01959f;
   --primary-surface: #f7feff;
@@ -213,32 +221,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* Typography */
-@utility text-xs {
-  @apply text-[0.625rem]/[1rem];
-}
-@utility text-s {
-  @apply text-[0.75rem]/[1.25rem];
-}
-@utility text-m {
-  @apply text-[0.875rem]/[1.5rem];
-}
-@utility text-l {
-  @apply text-[1rem]/[1.75rem];
-}
-
-@utility heading-s {
-  @apply text-[1.25rem]/[2rem];
-}
-@utility heading-m {
-  @apply text-[1.5rem]/[2.25rem];
-}
-@utility heading-l {
-  @apply text-[2rem]/[2.75rem];
-}
-
-@utility display {
-  @apply text-[3rem]/[4rem] font-bold;
 }

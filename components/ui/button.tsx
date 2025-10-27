@@ -23,7 +23,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        sm: "gap-1.5 px-4 py-1 text-s",
+        sm: "gap-1.5 px-4 py-1 text-sm",
         md: "px-4 py-1 text-m",
         lg: "px-4 py-1.5 text-l",
 
@@ -50,8 +50,8 @@ function Button({
     <motion.button
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }), "")}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       {...props}
     />
   );
