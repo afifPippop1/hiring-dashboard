@@ -37,7 +37,7 @@ export default function RootLayout({
       <body
         className={`${nunitoSans.variable} ${nunitoMono.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <main className="bg-neutral-20 h-svh w-svw">{children}</main>
       </body>
     </html>
   );
