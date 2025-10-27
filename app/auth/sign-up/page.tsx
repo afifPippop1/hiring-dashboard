@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
 import { SignUpForm } from "./sign-up-form";
+import { Routes } from "@/lib/routes";
 
 export default function SignUpPage() {
   return (
@@ -15,7 +16,7 @@ export default function SignUpPage() {
             </h1>
             <p>
               Sudah punya akun?{" "}
-              <Link href="/auth/sign-in" className="text-primary">
+              <Link href={Routes.SignIn} className="text-primary">
                 Masuk
               </Link>
             </p>

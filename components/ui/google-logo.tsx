@@ -1,6 +1,5 @@
+import { GOOGLE_LOGO } from "@/lib/assets";
 import Image, { ImageProps } from "next/image";
-
-const LOGO_SRC = "/assets/svg/google-logo.svg";
 
 export function GoogleLogo(props: Omit<ImageProps, "alt" | "src">) {
   return (
@@ -9,7 +8,7 @@ export function GoogleLogo(props: Omit<ImageProps, "alt" | "src">) {
       width={24}
       height={24}
       alt="google-logo"
-      src={LOGO_SRC}
+      src={GOOGLE_LOGO}
       {...props}
     />
   );
