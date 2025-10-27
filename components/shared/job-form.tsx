@@ -1,11 +1,19 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { Form, FormControl, FormItem, FormLabel } from "../ui/form";
-import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { Divider } from "../ui/divider";
+import { Form, FormControl, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupNumberInput,
+} from "../ui/input-group";
+import { Label } from "../ui/label";
+import { NumberInput } from "../ui/number-input";
 import {
   Select,
   SelectContent,
@@ -13,13 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Divider } from "../ui/divider";
-import { Label } from "../ui/label";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "../ui/input-group";
+import { Textarea } from "../ui/textarea";
 import { FormDataChecklist } from "./form-data-checklist";
 
 const JOB_TYPE = [
@@ -84,7 +86,11 @@ export function JobForm() {
         <FormItem>
           <FormLabel required>Number of Candidate Needed</FormLabel>
           <FormControl>
-            <Input placeholder="Ex. 2" />
+            <NumberInput
+              placeholder="Ex. 2"
+              thousandSeparator="."
+              decimalSeparator=","
+            />
           </FormControl>
         </FormItem>
 
@@ -96,7 +102,7 @@ export function JobForm() {
             <FormLabel>Minimum Estimated Salary</FormLabel>
             <FormControl>
               <InputGroup>
-                <InputGroupInput type="number" min="0" />
+                <InputGroupNumberInput min="0" />
                 <InputGroupAddon>
                   <p className="text-neutral-90">Rp</p>
                 </InputGroupAddon>
@@ -107,7 +113,7 @@ export function JobForm() {
             <FormLabel>Minimum Estimated Salary</FormLabel>
             <FormControl>
               <InputGroup>
-                <InputGroupInput type="number" />
+                <InputGroupNumberInput min="0" />
                 <InputGroupAddon>
                   <p className="text-neutral-90">Rp</p>
                 </InputGroupAddon>
