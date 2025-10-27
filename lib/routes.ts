@@ -1,5 +1,6 @@
 export const Routes = {
-  SignIn: "/auth/sign-in",
-  SignUp: "/auth/sign-up",
+  SignIn: "/sign-in",
+  SignUp: "/sign-up",
   Home: "/",
+  JobList: "/jobs",
 } as const;
