@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { EMPTY_JOB_ASSET } from "@/lib/assets";
 import Image from "next/image";
+import { JobOpeningDialog } from "./job-opening-dialog";
 
 export function EmptyJobList() {
   return (
@@ -20,7 +21,11 @@ export function EmptyJobList() {
             Create a job opening now and start the candidate process.
           </p>
         </section>
-        <Button variant="secondary" size="lg">Create a new job</Button>
+        <JobOpeningDialog>
+          <Button variant="secondary" size="lg">
+            Create a new job
+          </Button>
+        </JobOpeningDialog>
       </div>
     </div>
   );
