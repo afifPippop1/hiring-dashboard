@@ -1,15 +1,13 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import z from "zod";
+import { JobFormSchema } from "@/app/(dashboard)/jobs/job-opening-dialog";
+import { Controller, useFormContext } from "react-hook-form";
 import { Divider } from "../ui/divider";
-import { Form, FormControl, FormItem, FormLabel } from "../ui/form";
+import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupInput,
   InputGroupNumberInput,
 } from "../ui/input-group";
 import { Label } from "../ui/label";
@@ -24,7 +22,7 @@ import {
 import { Textarea } from "../ui/textarea";
 import { FormDataChecklist } from "./form-data-checklist";
 
-const JOB_TYPE = [
+export const JOB_TYPE = [
   "Full-time",
   "Contract",
   "Part-time",
@@ -32,36 +30,29 @@ const JOB_TYPE = [
   "Freelance",
 ] as const;
 
-const jobFormSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  type: z.enum(JOB_TYPE),
-  numberOfCandidate: z.number(),
-  minSalary: z.number(),
-  maxSalary: z.number(),
-});
-
-type JobFormSchema = z.infer<typeof jobFormSchema>;
-
 export function JobForm() {
-  const form = useForm<JobFormSchema>({
-    resolver: zodResolver(jobFormSchema),
-  });
-
+  const { control } = useFormContext<JobFormSchema>();
   return (
-    <Form {...form}>
-      <form className="flex flex-col items-stretch gap-4">
-        <FormItem>
-          <FormLabel required>Job Name</FormLabel>
-          <FormControl>
-            <Input placeholder="Ex. Front End Engineer" />
-          </FormControl>
-        </FormItem>
+    <div className="flex flex-col items-stretch gap-4">
+      <Controller
+        control={control}
+        name="title"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel required>Job Name</FieldLabel>
+            <Input placeholder="Ex. Front End Engineer" {...field} />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
 
-        <FormItem>
-          <FormLabel required>Job Type</FormLabel>
-          <FormControl>
-            <Select>
+      <Controller
+        control={control}
+        name="type"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel required>Job Name</FieldLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select job type" />
               </SelectTrigger>
@@ -73,57 +64,67 @@ export function JobForm() {
                 ))}
               </SelectContent>
             </Select>
-          </FormControl>
-        </FormItem>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
 
-        <FormItem>
-          <FormLabel required>Job Description</FormLabel>
-          <FormControl>
-            <Textarea placeholder="Ex. Front End Engineer" />
-          </FormControl>
-        </FormItem>
-
-        <FormItem>
-          <FormLabel required>Number of Candidate Needed</FormLabel>
-          <FormControl>
+      <Controller
+        control={control}
+        name="descriptions"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel required>Job Description</FieldLabel>
+            <Textarea placeholder="Explain job description" {...field} />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        control={control}
+        name="candidateNeeded"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel required>Number of Candidate Needed</FieldLabel>
             <NumberInput
               placeholder="Ex. 2"
               thousandSeparator="."
               decimalSeparator=","
+              onValueChange={(values) => {
+                field.onChange(values.floatValue);
+              }}
+              value={field.value}
             />
-          </FormControl>
-        </FormItem>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
 
-        <Divider className="border-dashed border-neutral-40" />
+      <Divider className="border-dashed border-neutral-40" />
 
-        <Label>Job Salary</Label>
-        <div className="flex gap-4">
-          <FormItem className="flex-1">
-            <FormLabel>Minimum Estimated Salary</FormLabel>
-            <FormControl>
-              <InputGroup>
-                <InputGroupNumberInput min="0" />
-                <InputGroupAddon>
-                  <p className="text-neutral-90">Rp</p>
-                </InputGroupAddon>
-              </InputGroup>
-            </FormControl>
-          </FormItem>
-          <FormItem className="flex-1">
-            <FormLabel>Minimum Estimated Salary</FormLabel>
-            <FormControl>
-              <InputGroup>
-                <InputGroupNumberInput min="0" />
-                <InputGroupAddon>
-                  <p className="text-neutral-90">Rp</p>
-                </InputGroupAddon>
-              </InputGroup>
-            </FormControl>
-          </FormItem>
-        </div>
+      <Label>Job Salary</Label>
+      <div className="flex gap-4">
+        <Field className="flex-1">
+          <FieldLabel>Minimum Estimated Salary</FieldLabel>
+          <InputGroup>
+            <InputGroupNumberInput min="0" />
+            <InputGroupAddon>
+              <p className="text-neutral-90">Rp</p>
+            </InputGroupAddon>
+          </InputGroup>
+        </Field>
+        <Field className="flex-1">
+          <FieldLabel>Minimum Estimated Salary</FieldLabel>
+          <InputGroup>
+            <InputGroupNumberInput min="0" />
+            <InputGroupAddon>
+              <p className="text-neutral-90">Rp</p>
+            </InputGroupAddon>
+          </InputGroup>
+        </Field>
+      </div>
 
-        <FormDataChecklist />
-      </form>
-    </Form>
+      <FormDataChecklist />
+    </div>
   );
 }

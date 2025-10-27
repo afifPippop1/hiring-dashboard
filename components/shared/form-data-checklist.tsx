@@ -1,5 +1,4 @@
 import Chip from "../ui/chip";
-import { Divider } from "../ui/divider";
 
 const FORM_ITEM_OPTIONS = {
   Mandatory: "Mandatory",
