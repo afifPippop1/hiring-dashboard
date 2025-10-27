@@ -1,21 +1,21 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormItem, FormLabel } from "@/components/ui/form";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const signUpSchema = z.object({
-  email: z.email(),
-  password: z.string().min(8),
-});
-
-type SignUpSchema = z.infer<typeof signUpSchema>;
+import { useForm } from "react-hook-form";
+import { signUpSchema, SignUpSchema } from "./sign-up.schema";
+import { signUpAction } from "./sign-up.action";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Routes } from "@/lib/routes";
+import { SignUpErrorMessage } from "./sign-up-error-message";
 
 export function SignUpForm() {
+  const router = useRouter();
   const form = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -23,34 +23,58 @@ export function SignUpForm() {
       password: "",
     },
   });
+  const [formMessage, setFormMessage] = React.useState<{
+    success: boolean;
+    error?: string;
+  } | null>(null);
 
-  function onSubmit(data: SignUpSchema) {
-    console.log(data);
+  async function onSubmit(d: SignUpSchema) {
+    const { data, error } = await signUpAction(d);
+    setFormMessage({ success: !!data.user, error: error?.message });
+    if (data.user) {
+      router.push(Routes.SignIn);
+    }
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col items-stretch gap-4">
-          <section className="flex flex-col gap-2">
+          {formMessage?.error && (
+            <Alert variant="destructive" className="text-center">
+              <AlertTitle>
+                <SignUpErrorMessage message={formMessage.error} />
+              </AlertTitle>
+            </Alert>
+          )}
+
+          {formMessage?.success && (
+            <Alert variant="success">
+              <AlertTitle>
+                Successfully register. redirect to sign in
+              </AlertTitle>
+            </Alert>
+          )}
+          <FormItem>
             <FormLabel>Alamat email</FormLabel>
             <FormControl autoFocus>
               <Input {...form.register("email")} />
             </FormControl>
-          </section>
+          </FormItem>
 
-          <section className="flex flex-col gap-2">
+          <FormItem>
             <FormLabel>Password</FormLabel>
             <FormControl>
               <Input {...form.register("password")} type="password" />
             </FormControl>
-          </section>
+          </FormItem>
 
           <Button
             variant="secondary"
             size="lg"
             className="w-full"
             type="submit"
+            disabled={form.formState.isSubmitting}
           >
             Daftar dengan email
           </Button>
@@ -62,7 +86,11 @@ export function SignUpForm() {
             <span className="flex-1 border-b border-neutral-60" />
           </div>
 
-          <Button variant="outline" type="button">
+          <Button
+            variant="outline"
+            type="button"
+            disabled={form.formState.isSubmitting}
+          >
             <GoogleLogo />
             Daftar dengan Google
           </Button>

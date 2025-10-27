@@ -1,19 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormLabel } from "@/components/ui/form";
+import { Divider } from "@/components/ui/divider";
+import { Form, FormControl, FormItem, FormLabel } from "@/components/ui/form";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const signInSchema = z.object({
-  email: z.email(),
-  password: z.string().min(8),
-});
-
-type SignInSchema = z.infer<typeof signInSchema>;
+import { useForm } from "react-hook-form";
+import { signInSchema, SignInSchema } from "./sign-in.schema";
+import { signInAction } from "./action";
+import React from "react";
+import { useRouter } from "next/navigation";
+import { Routes } from "@/lib/routes";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { getSignInErrorMessage } from "./sign-in-error-message";
 
 export function SignInForm() {
   const form = useForm<SignInSchema>({
@@ -23,48 +23,73 @@ export function SignInForm() {
       password: "",
     },
   });
+  const [formMessage, setFormMessage] = React.useState<{
+    success: boolean;
+    error?: string;
+  } | null>(null);
 
-  function onSubmit(data: SignInSchema) {
-    console.log(data);
+  const router = useRouter();
+
+  async function onSubmit(d: SignInSchema) {
+    const { data, error } = await signInAction(d);
+    setFormMessage({ success: !!data.user, error: error?.message });
+    if (data.user) {
+      router.push(Routes.Home);
+    }
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col items-stretch gap-4">
-          <section className="flex flex-col gap-2">
+          {formMessage?.error && (
+            <Alert variant="destructive" className="text-center">
+              <AlertTitle>
+                {getSignInErrorMessage(formMessage.error)}
+              </AlertTitle>
+            </Alert>
+          )}
+          {formMessage?.success && (
+            <Alert variant="success" className="text-center">
+              <AlertTitle>
+                Successfully signed in. redirecting to sign in ...
+              </AlertTitle>
+            </Alert>
+          )}
+
+          <FormItem>
             <FormLabel>Alamat email</FormLabel>
             <FormControl autoFocus>
               <Input {...form.register("email")} />
             </FormControl>
-          </section>
+          </FormItem>
 
-          <section className="flex flex-col gap-2">
+          <FormItem>
             <FormLabel>Password</FormLabel>
             <FormControl>
               <Input {...form.register("password")} type="password" />
             </FormControl>
-          </section>
+          </FormItem>
 
           <Button
             variant="secondary"
             size="lg"
             className="w-full"
             type="submit"
+            disabled={form.formState.isSubmitting}
           >
-            Daftar dengan email
+            Masuk
           </Button>
 
-          {/* Divider */}
-          <div className="flex items-center gap-3">
-            <span className="flex-1 border-b border-neutral-60" />
-            <p className="text-sm text-neutral-60">or</p>
-            <span className="flex-1 border-b border-neutral-60" />
-          </div>
+          <Divider text="atau" />
 
-          <Button variant="outline" type="button">
+          <Button
+            variant="outline"
+            type="button"
+            disabled={form.formState.isSubmitting}
+          >
             <GoogleLogo />
-            Daftar dengan Google
+            Masuk dengan Google
           </Button>
         </div>
       </form>
