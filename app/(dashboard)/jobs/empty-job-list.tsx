@@ -12,6 +12,7 @@ export function EmptyJobList() {
           alt="empty-job-list"
           width={306}
           height={300}
+          loading="eager"
         />
         <section className="text-center">
           <h1 className="text-heading-sm font-bold text-neutral-90">

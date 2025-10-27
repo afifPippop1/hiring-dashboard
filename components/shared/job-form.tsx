@@ -13,6 +13,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Divider } from "../ui/divider";
+import { Label } from "../ui/label";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "../ui/input-group";
+import { FormDataChecklist } from "./form-data-checklist";
 
 const JOB_TYPE = [
   "Full-time",
@@ -79,6 +87,36 @@ export function JobForm() {
             <Input placeholder="Ex. 2" />
           </FormControl>
         </FormItem>
+
+        <Divider className="border-dashed border-neutral-40" />
+
+        <Label>Job Salary</Label>
+        <div className="flex gap-4">
+          <FormItem className="flex-1">
+            <FormLabel>Minimum Estimated Salary</FormLabel>
+            <FormControl>
+              <InputGroup>
+                <InputGroupInput type="number" min="0" />
+                <InputGroupAddon>
+                  <p className="text-neutral-90">Rp</p>
+                </InputGroupAddon>
+              </InputGroup>
+            </FormControl>
+          </FormItem>
+          <FormItem className="flex-1">
+            <FormLabel>Minimum Estimated Salary</FormLabel>
+            <FormControl>
+              <InputGroup>
+                <InputGroupInput type="number" />
+                <InputGroupAddon>
+                  <p className="text-neutral-90">Rp</p>
+                </InputGroupAddon>
+              </InputGroup>
+            </FormControl>
+          </FormItem>
+        </div>
+
+        <FormDataChecklist />
       </form>
     </Form>
   );
