@@ -1,6 +1,5 @@
 "use client";
 
-import { JobFormSchema } from "@/app/(dashboard)/jobs/job-opening-dialog";
 import { Controller, useFormContext } from "react-hook-form";
 import { Divider } from "../ui/divider";
 import { Field, FieldError, FieldLabel } from "../ui/field";
@@ -20,15 +19,8 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
-import { FormDataChecklist } from "./form-data-checklist";
-
-export const JOB_TYPE = [
-  "Full-time",
-  "Contract",
-  "Part-time",
-  "Internship",
-  "Freelance",
-] as const;
+import { ApplicationFormBuilder } from "./application-form-builder";
+import { JOB_TYPE_ENUM, JobFormSchema } from "@/lib/job/job.schema";
 
 export function JobForm() {
   const { control } = useFormContext<JobFormSchema>();
@@ -57,7 +49,7 @@ export function JobForm() {
                 <SelectValue placeholder="Select job type" />
               </SelectTrigger>
               <SelectContent>
-                {JOB_TYPE.map((type) => (
+                {JOB_TYPE_ENUM.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}
                   </SelectItem>
@@ -124,7 +116,7 @@ export function JobForm() {
         </Field>
       </div>
 
-      <FormDataChecklist />
+      <ApplicationFormBuilder />
     </div>
   );
 }
