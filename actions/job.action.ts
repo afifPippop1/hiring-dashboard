@@ -38,3 +38,17 @@ export async function getJobList() {
   const normalizedData = data.map((job) => JobMapper.fromSupabase(job));
   return normalizedData;
 }
+
+export async function getJob(id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("jobs")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) {
+    throw error;
+  }
+  const normalizedData = JobMapper.fromSupabase(data);
+  return normalizedData;
+}

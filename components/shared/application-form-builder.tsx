@@ -11,7 +11,7 @@ import Chip from "../ui/chip";
 
 export function ApplicationFormBuilder() {
   return (
-    <div className="p-4 border border-neutral-30 rounded-[8px]">
+    <div className="p-4 border border-neutral-30 rounded-md">
       <h3 className="text-md font-bold">
         Minimum Profile Information Required
       </h3>
