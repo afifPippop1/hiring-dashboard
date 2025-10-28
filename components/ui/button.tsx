@@ -11,7 +11,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-neutral-10 hover:bg-primary-hover",
+        primary: "bg-primary hover:bg-primary-hover text-neutral-10",
         destructive:
           "bg-destructive text-white hover:bg-danger focus-visible:ring-danger-border",
         secondary: "bg-secondary text-neutral-90 hover:bg-secondary-hover",
@@ -24,8 +24,8 @@ const buttonVariants = cva(
       },
       size: {
         sm: "gap-1.5 px-4 py-1 text-sm",
-        md: "px-4 py-1 text-m",
-        lg: "px-4 py-1.5 text-l",
+        md: "px-4 py-1 text-md",
+        lg: "px-4 py-1.5 text-lg",
 
         icon: "size-9",
         "icon-sm": "size-8",
