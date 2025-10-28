@@ -8,17 +8,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { ApplicationFormConverter } from "@/lib/application_form/application-fomr-converter";
 import { APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE } from "@/lib/application_form/application-form-builder";
 import { JOB_STATUS, jobFormSchema, JobFormSchema } from "@/lib/job/job.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReactNode } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { createJob } from "./job.action";
+import { createJob } from "../../../actions/job.action";
 
-export function JobOpeningDialog({ children }: { children: ReactNode }) {
+export function JobOpeningDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   const form = useForm<JobFormSchema>({
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
@@ -29,14 +32,15 @@ export function JobOpeningDialog({ children }: { children: ReactNode }) {
     },
   });
   async function onSubmit(formData: JobFormSchema) {
-    const { data, error } = await createJob(formData);
-    console.log({ data, error });
+    const { error } = await createJob(formData);
+    if (!error) {
+    }
     form.reset();
+    onOpenChange(false);
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="p-0 gap-0">
         <FormProvider {...form}>
           <form

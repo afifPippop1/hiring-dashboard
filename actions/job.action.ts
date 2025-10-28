@@ -1,6 +1,7 @@
 "use server";
 
 import { ApplicationFormConverter } from "@/lib/application_form/application-fomr-converter";
+import { JobMapper } from "@/lib/job/job-mapper";
 import { JobFormSchema } from "@/lib/job/job.schema";
 import { createClient } from "@/lib/supabase/server";
 
@@ -26,4 +27,14 @@ export async function createJob(formData: JobFormSchema) {
   });
 
   return { data, error };
+}
+
+export async function getJobList() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("jobs").select("*");
+  if (error) {
+    throw error;
+  }
+  const normalizedData = data.map((job) => JobMapper.fromSupabase(job));
+  return normalizedData;
 }

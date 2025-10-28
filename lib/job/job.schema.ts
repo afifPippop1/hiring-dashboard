@@ -9,6 +9,7 @@ const JOB_TYPE = {
   Internship: "Internship",
   Freelance: "Freelance",
 } as const;
+
 const JOB_TYPE_ENUM = [
   JOB_TYPE.Fulltime,
   JOB_TYPE.Contract,
@@ -44,8 +45,11 @@ const jobFormSchema = z.object({
   status: z.enum(JOB_STATUS_ENUM),
   applicationsForm: applicationFormBuilderSchema,
 });
+
 type JobFormSchema = z.infer<typeof jobFormSchema>;
+
+type Job = JobFormSchema & { id: string; createdAt: string; updatedAt?: string };
 
 export { JOB_TYPE, JOB_TYPE_ENUM, JOB_STATUS, JOB_STATUS_ENUM, jobFormSchema };
 
-export type { JobFormSchema, JobType, JobStatus };
+export type { JobFormSchema, JobType, JobStatus, Job };
