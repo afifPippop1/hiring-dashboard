@@ -32,6 +32,12 @@ const JOB_STATUS_ENUM = [
 ] as const;
 type JobStatus = (typeof JOB_STATUS_ENUM)[number];
 
+const CURRENCY = {
+  IDR: "IDR",
+} as const;
+
+type CurrencyType = (typeof CURRENCY)[keyof typeof CURRENCY];
+
 // JOB FORM
 const jobFormSchema = z.object({
   title: z.string().min(1, "Job title is required"),
@@ -43,13 +49,26 @@ const jobFormSchema = z.object({
   minSalary: z.number().optional(),
   maxSalary: z.number().optional(),
   status: z.enum(JOB_STATUS_ENUM),
+  currency: z.enum([CURRENCY.IDR]),
   applicationsForm: applicationFormBuilderSchema,
 });
 
 type JobFormSchema = z.infer<typeof jobFormSchema>;
 
-type Job = JobFormSchema & { id: string; createdAt: string; updatedAt?: string };
+type Job = Omit<JobFormSchema, "applicationsForm"> &
+  Partial<Pick<JobFormSchema, "applicationsForm">> & {
+    id: string;
+    createdAt: string;
+    updatedAt?: string;
+  };
 
-export { JOB_TYPE, JOB_TYPE_ENUM, JOB_STATUS, JOB_STATUS_ENUM, jobFormSchema };
+export {
+  JOB_TYPE,
+  JOB_TYPE_ENUM,
+  JOB_STATUS,
+  JOB_STATUS_ENUM,
+  jobFormSchema,
+  CURRENCY,
+};
 
-export type { JobFormSchema, JobType, JobStatus, Job };
+export type { JobFormSchema, JobType, JobStatus, Job, CurrencyType };

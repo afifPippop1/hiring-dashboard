@@ -31,7 +31,11 @@ export async function createJob(formData: JobFormSchema) {
 
 export async function getJobList() {
   const supabase = await createClient();
-  const { data, error } = await supabase.from("jobs").select("*");
+  const { data, error } = await supabase
+    .from("jobs")
+    .select(
+      "id, title, descriptions, type, candidate_needed, salary_currency, min_salary, max_salary, status, created_at, updated_at"
+    );
   if (error) {
     throw error;
   }

@@ -7,6 +7,7 @@ import { JobCard } from "./job-card";
 export default function Jobspage() {
   const jobs = useJobs();
   if (!jobs.data?.length) return <EmptyJobList />;
+
   return (
     <div className="flex flex-col items-stretch">
       {jobs.data.map((job) => (
