@@ -49,6 +49,7 @@ function Button({
   return (
     <motion.button
       data-slot="button"
+      type="button"
       className={cn(buttonVariants({ variant, size, className }))}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -57,4 +58,20 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+function PrimitiveButton({
+  className,
+  variant,
+  size,
+  ...props
+}: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants>) {
+  return (
+    <button
+      data-slot="button"
+      type="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+}
+
+export { Button, buttonVariants, PrimitiveButton };

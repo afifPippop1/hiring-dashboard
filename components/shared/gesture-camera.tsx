@@ -6,6 +6,7 @@ import Webcam from "react-webcam";
 
 export default function GestureCamera() {
   const webcamRef = useRef<Webcam>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [photo, setPhoto] = useState<string | null>(null);
   const [poseStep, setPoseStep] = useState(3);
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -40,12 +41,28 @@ export default function GestureCamera() {
         if (!detector) return;
 
         const results = await detector.detectForVideo(video, Date.now());
+        const ctx = canvasRef.current?.getContext("2d");
+        if (!ctx) return;
+
+        // Clear the canvas each frame
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
         if (!results.landmarks || results.landmarks.length === 0) return;
 
         const landmarks = results.landmarks[0];
-        const raisedFingers = detectRaisedFingers(landmarks);
+        const boundingBox = getBoundingBox(landmarks, video);
 
-        // Pose detection sequence 3 → 2 → 1
+        const raisedFingers = detectRaisedFingers(landmarks);
+        const isCorrectPose =
+          (poseStep === 3 && raisedFingers === 2) ||
+          (poseStep === 2 && raisedFingers <= 1);
+
+        drawBoundingBox(ctx, boundingBox, isCorrectPose);
+
+        // Draw small circles on fingertips
+        drawLandmarks(ctx, landmarks, isCorrectPose);
+
+        // Pose sequence logic
         if (poseStep === 3 && raisedFingers === 2) {
           setPoseStep(2);
         } else if (poseStep === 2 && raisedFingers <= 1) {
@@ -57,7 +74,7 @@ export default function GestureCamera() {
             startCountdownAndCapture();
           }
         }
-      }, 300);
+      }, 200);
     })();
 
     async function startCountdownAndCapture() {
@@ -89,11 +106,15 @@ export default function GestureCamera() {
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         className="rounded-md"
+        videoConstraints={{ facingMode: "user" }}
+      />
+      <canvas
+        ref={canvasRef}
+        className="absolute top-0 left-0 w-full h-full rounded-md pointer-events-none"
       />
 
-      {/* Countdown overlay */}
       {countdown && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-6xl font-bold transition-all duration-300">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-6xl font-bold">
           {countdown}
         </div>
       )}
@@ -102,7 +123,7 @@ export default function GestureCamera() {
         Pose {poseStep} → show next pose ({poseStep - 1})
       </p>
 
-      {photo && (
+      {/* {photo && (
         <div className="mt-2">
           <img
             src={photo}
@@ -110,34 +131,62 @@ export default function GestureCamera() {
             className="rounded-md border w-40 h-40 object-cover"
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 }
 
-/**
- * Detect number of raised fingers from hand landmarks
- */
+// === Helper functions ===
+
+function getBoundingBox(
+  landmarks: { x: number; y: number }[],
+  video: HTMLVideoElement
+) {
+  const xs = landmarks.map((p) => p.x * video.videoWidth);
+  const ys = landmarks.map((p) => p.y * video.videoHeight);
+  const minX = Math.min(...xs);
+  const minY = Math.min(...ys);
+  const maxX = Math.max(...xs);
+  const maxY = Math.max(...ys);
+  return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
+}
+
+function drawBoundingBox(
+  ctx: CanvasRenderingContext2D,
+  box: { x: number; y: number; width: number; height: number },
+  isCorrect: boolean
+) {
+  ctx.strokeStyle = isCorrect ? "lime" : "red";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(box.x, box.y, box.width, box.height);
+}
+
+function drawLandmarks(
+  ctx: CanvasRenderingContext2D,
+  landmarks: { x: number; y: number }[],
+  isCorrect: boolean
+) {
+  ctx.fillStyle = isCorrect ? "lime" : "red";
+  for (const p of landmarks) {
+    ctx.beginPath();
+    ctx.arc(p.x * ctx.canvas.width, p.y * ctx.canvas.height, 4, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}
+
 function detectRaisedFingers(landmarks: { x: number; y: number }[]): number {
-  const validLandmarks = landmarks.filter((p) => p.x != null && p.y != null);
-  if (validLandmarks.length < 21) return 0;
-
   const fingers = [
-    { tip: 4, base: 2 }, // thumb
-    { tip: 8, base: 5 }, // index
-    { tip: 12, base: 9 }, // middle
-    { tip: 16, base: 13 }, // ring
-    { tip: 20, base: 17 }, // pinky
+    { tip: 4, base: 2 },
+    { tip: 8, base: 5 },
+    { tip: 12, base: 9 },
+    { tip: 16, base: 13 },
+    { tip: 20, base: 17 },
   ];
-
   let count = 0;
   for (const f of fingers) {
     const tip = landmarks[f.tip];
     const base = landmarks[f.base];
-    if (tip && base && tip.y < base.y) {
-      count++;
-    }
+    if (tip && base && tip.y < base.y) count++;
   }
-
   return count;
 }

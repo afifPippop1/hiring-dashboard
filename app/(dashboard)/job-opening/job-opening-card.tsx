@@ -20,7 +20,6 @@ export function JobOpeningCard({ job }: { job: Job }) {
     // Or, to replace the current history entry:
     // router.replace(`?${currentParams.toString()}`);
   };
-  console.log(jobOpening.job);
 
   return (
     <Card onClick={updateQueryParam}>
