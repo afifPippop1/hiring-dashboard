@@ -12,6 +12,8 @@ import {
 } from "../ui/breadcrumb";
 import Link from "next/link";
 import { Logo } from "../ui/logo";
+import { ArrowLeftIcon } from "../icons/arrow-left";
+import { Routes } from "@/lib/routes";
 
 export function Navbar() {
   const params = useParams<{ jobId?: string }>();
@@ -20,7 +22,17 @@ export function Navbar() {
   return (
     <nav className="h-16 bg-neutral-10 border border-[#EFEEEE] shadow-button flex items-center justify-between p-6">
       <section className="flex items-center justify-center gap-6">
-        <Logo />
+        {segment === "job-opening" && (
+          <Link href={Routes.JobOpening} className="md:hidden">
+            <Button variant="outline" size="icon-sm">
+              <ArrowLeftIcon />
+            </Button>
+          </Link>
+        )}
+        <Link href="/" className="cursor-pointer">
+          <Logo />
+        </Link>
+
         {segment === "jobs" && (
           <Breadcrumb>
             <BreadcrumbList>
