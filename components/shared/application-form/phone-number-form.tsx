@@ -4,7 +4,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-export function PhoneNumberForm() {
+export function PhoneNumberForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();
   return (
     <Controller
@@ -12,7 +12,7 @@ export function PhoneNumberForm() {
       name="phone_number"
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel required>Phone number</FieldLabel>
+          <FieldLabel required={required}>Phone number</FieldLabel>
           <PhoneInput
             country="id"
             enableSearch

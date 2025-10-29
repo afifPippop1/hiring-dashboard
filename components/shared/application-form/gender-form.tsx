@@ -4,7 +4,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { Controller, useFormContext } from "react-hook-form";
 
-export function GenderForm() {
+export function GenderForm({ required }: { required?: boolean }) {
+  console.log(required);
   const { control } = useFormContext<ApplicationFormSchema>();
   return (
     <Controller
@@ -12,7 +13,7 @@ export function GenderForm() {
       name="gender"
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel required>Pronoun (gender)</FieldLabel>
+          <FieldLabel required={required}>Pronoun (gender)</FieldLabel>
           <RadioGroup
             onChange={field.onChange}
             value={field.value}

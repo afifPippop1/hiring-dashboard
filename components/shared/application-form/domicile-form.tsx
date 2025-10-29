@@ -54,7 +54,7 @@ export const domicileOptions = [
   "Kota Jayapura - Papua",
 ];
 
-export function DomicileForm() {
+export function DomicileForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();
 
   return (
@@ -63,7 +63,7 @@ export function DomicileForm() {
       name="domicile"
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel required>Domicile</FieldLabel>
+          <FieldLabel required={required}>Domicile</FieldLabel>
           <DomicileAutocomplete value={field.value} onChange={field.onChange} />
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
         </Field>

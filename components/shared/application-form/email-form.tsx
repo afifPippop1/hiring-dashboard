@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { Controller, useFormContext } from "react-hook-form";
 
-export function EmailForm() {
+export function EmailForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();
   return (
     <Controller
@@ -11,7 +11,7 @@ export function EmailForm() {
       name="email"
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel required>Email</FieldLabel>
+          <FieldLabel required={required}>Email</FieldLabel>
           <Input placeholder="Enter your email address" {...field} />
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
         </Field>
