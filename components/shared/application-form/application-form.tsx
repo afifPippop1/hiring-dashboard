@@ -20,8 +20,14 @@ import { PhoneNumberForm } from "./phone-number-form";
 import { PhotoProfileForm } from "./photo-profile-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { EmptyState } from "../empty-state";
+import { SUCCESS_APPLY_ASSET } from "@/lib/assets";
 
-const ComponentByKey: Record<ApplicationFormKey, React.FC> = {
+const ComponentByKey: Record<
+  ApplicationFormKey,
+  React.FC<{ required?: boolean }>
+> = {
   full_name: FullnameForm,
   date_of_birth: DateOfBirthForm,
   phone_number: PhoneNumberForm,
@@ -60,6 +66,7 @@ function createSchema(fields: ApplicationFormField[]) {
 export function ApplicationForm() {
   const { jobId } = useParams<{ jobId: string }>();
   const job = useJob(jobId);
+  const [appliedSuccess, setAppliedSuccess] = useState(false);
 
   const schema = createSchema(job?.applicationFormArray || []);
 
@@ -69,6 +76,19 @@ export function ApplicationForm() {
 
   async function onSubmit(data: z.infer<typeof schema>) {
     const response = await submitApplicationAction({ ...data, jobId });
+    if (!response.error) {
+      setAppliedSuccess(true);
+    }
+  }
+
+  if (appliedSuccess) {
+    return (
+      <EmptyState
+        src={SUCCESS_APPLY_ASSET}
+        title="🎉Your application was sent!"
+        description="Congratulation! You've taken the first step towards a rewarding career at Rakamin. We look foward to learning more about you during the application process."
+      />
+    );
   }
 
   return (
@@ -79,7 +99,9 @@ export function ApplicationForm() {
       >
         {job?.applicationFormArray?.map((field) => {
           const Component = ComponentByKey[field.key];
-          return <Component key={field.key} />;
+          return (
+            <Component key={field.key} required={field.validation.required} />
+          );
         })}
         <Button type="submit">Submit</Button>
       </form>

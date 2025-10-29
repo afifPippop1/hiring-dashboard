@@ -3,6 +3,7 @@ import { ApplicationForm } from "@/components/shared/application-form/applicatio
 import { Button } from "@/components/ui/button";
 import { Routes } from "@/lib/routes";
 import Link from "next/link";
+import { JobTitle } from "./job-title";
 
 export default async function ApplyJobForm(props: {
   params: { jobId: string };
@@ -17,9 +18,7 @@ export default async function ApplyJobForm(props: {
               <ArrowLeftIcon />
             </Button>
           </Link>
-          <h1 className="font-bold text-xl text-neutral-100">
-            Apply Front End at Rakamin
-          </h1>
+          <JobTitle />
         </div>
         <div className="px-6">
           <ApplicationForm />

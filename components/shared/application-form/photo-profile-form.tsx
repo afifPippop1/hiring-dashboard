@@ -1,14 +1,14 @@
 import { UploadIcon } from "@/components/icons/upload";
 import { Button } from "@/components/ui/button";
+import { Field, FieldError } from "@/components/ui/field";
+import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { AVATAR_THUMBNAIL_ASSET } from "@/lib/assets";
 import Image from "next/image";
-import { CapturePhotoProfileDialog } from "./capture-photo-profile-dialog";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
-import { Field, FieldError } from "@/components/ui/field";
+import { CapturePhotoProfileDialog } from "./capture-photo-profile-dialog";
 
-export function PhotoProfileForm() {
+export function PhotoProfileForm(_: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();
   const [openPhotoProfileDialog, setOpenPhotoProfileDialog] =
     React.useState(false);

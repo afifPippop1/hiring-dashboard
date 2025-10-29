@@ -6,6 +6,7 @@ export const MAILBOX_ASSET = "/assets/svg/mailbox-asset.svg";
 export const EMPTY_JOB_ASSET = "/assets/svg/empty-job-asset.svg";
 export const EMPTY_CANDIDATES_ASSET = "/assets/svg/empty-candidates-asset.svg";
 export const AVATAR_THUMBNAIL_ASSET = "/assets/png/avatar-thumbnail-asset.png";
+export const SUCCESS_APPLY_ASSET = "/assets/svg/success-apply.svg";
 
 export const HANDPOSE_1 = "/assets/svg/handpose-1-filled.svg";
 export const HANDPOSE_2 = "/assets/svg/handpose-2-filled.svg";

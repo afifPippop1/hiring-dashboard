@@ -7,7 +7,7 @@ import { CalendarDays, ChevronDownIcon } from "lucide-react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-export function DateOfBirthForm() {
+export function DateOfBirthForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();
   const [open, setOpen] = React.useState(false);
 
@@ -17,7 +17,7 @@ export function DateOfBirthForm() {
       name="date_of_birth"
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel required>Date of birth</FieldLabel>
+          <FieldLabel required={required}>Date of birth</FieldLabel>
           <div className="flex">
             <Button
               variant="outline"

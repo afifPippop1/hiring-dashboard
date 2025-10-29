@@ -7,6 +7,7 @@ import {
   FlattenedCandidateApplicationForm,
 } from "./application_form/application-form.schema";
 import dayjs from "dayjs";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 export function flattenApplication(
   application: CandidateApplicationForm
@@ -66,7 +67,24 @@ export function createTableHeader(cols: CandidateApplicationForm) {
             );
           }
           if (col.key === "linkedin_link") {
-            return <a href={row.getValue(col.key)}>{row.getValue(col.key)}</a>;
+            return (
+              <a
+                className="text-primary"
+                target="_blank"
+                href={row.getValue(col.key)}
+              >
+                {row.getValue(col.key)}
+              </a>
+            );
+          }
+          if (col.key === "phone_number") {
+            return (
+              <div>
+                {parsePhoneNumberFromString(
+                  `+${row.getValue(col.key)}`
+                )?.formatNational()}
+              </div>
+            );
           }
 
           return <div>{row.getValue(col.key)}</div>;
