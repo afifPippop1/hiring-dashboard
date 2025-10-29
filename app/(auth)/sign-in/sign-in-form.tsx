@@ -34,7 +34,7 @@ export function SignInForm() {
     const { data, error } = await signInAction(d);
     setFormMessage({ success: !!data.user, error: error?.message });
     if (data.user) {
-      router.push(Routes.Home);
+      router.push(Routes.JobList);
     }
   }
 

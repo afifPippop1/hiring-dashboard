@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito_Sans, Nunito } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,9 @@ export default function RootLayout({
       <body
         className={`${nunitoSans.variable} ${nunitoMono.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="bg-neutral-20 h-svh w-svw">{children}</main>
+        <Providers>
+          <main className="bg-neutral-20 h-svh w-svw">{children}</main>
+        </Providers>
       </body>
     </html>
   );

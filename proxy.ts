@@ -1,9 +1,21 @@
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
+import { Routes } from "./lib/routes";
 
 export async function proxy(request: NextRequest) {
   // update user's auth session
-  return await updateSession(request);
+  const user = await updateSession(request);
+  if (!user && request.nextUrl.pathname === Routes.Home) {
+    return NextResponse.redirect(new URL(Routes.JobOpening, request.url));
+  }
+  if (user && request.nextUrl.pathname === Routes.Home) {
+    return NextResponse.redirect(new URL(Routes.JobList, request.url));
+  }
+
+  if (!user && request.nextUrl.pathname === Routes.JobList) {
+    return NextResponse.redirect(new URL(Routes.SignIn, request.url));
+  }
+  return user;
 }
 
 export const config = {

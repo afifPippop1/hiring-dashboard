@@ -14,7 +14,13 @@ function DividerLine(props: React.ComponentProps<"span">) {
 }
 
 export function Divider({ text, ...props }: DividerProps) {
-  if (!text) return <DividerLine {...props} />;
+  if (!text) {
+    return (
+      <div className="flex items-center">
+        <DividerLine {...props} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center gap-3">

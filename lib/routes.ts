@@ -1,5 +1,8 @@
 export const Routes = {
-  SignIn: "/auth/sign-in",
-  SignUp: "/auth/sign-up",
+  SignIn: "/sign-in",
+  SignUp: "/sign-up",
   Home: "/",
+  JobList: "/jobs",
+  JobOpening: "/job-opening",
+  ApplyJob: "/job-opening/apply-job",
 } as const;
