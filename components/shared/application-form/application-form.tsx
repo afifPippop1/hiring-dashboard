@@ -10,6 +10,7 @@ import { LinkedinLinkForm } from "./linkedin-link-form";
 import { Button } from "@/components/ui/button";
 import { DateOfBirthForm } from "./date-of-birth-form";
 import { PhoneNumberForm } from "./phone-number-form";
+import { DomicileForm } from "./domicile-form";
 
 export function ApplicationForm() {
   const form = useForm<ApplicationFormSchema>({
@@ -17,18 +18,25 @@ export function ApplicationForm() {
       full_name: "",
     },
   });
+  function onSubmit(data: ApplicationFormSchema) {
+    console.log(data);
+  }
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4">
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <PhotoProfileForm />
         <FullnameForm />
         <DateOfBirthForm />
         <PhoneNumberForm />
         <GenderForm />
+        <DomicileForm />
         <EmailForm />
         <LinkedinLinkForm />
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </FormProvider>
   );
