@@ -14,6 +14,38 @@ export type Database = {
   }
   public: {
     Tables: {
+      applications: {
+        Row: {
+          attributes: Json[]
+          created_at: string
+          id: string
+          job_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          attributes: Json[]
+          created_at?: string
+          id?: string
+          job_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          attributes?: Json[]
+          created_at?: string
+          id?: string
+          job_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       jobs: {
         Row: {
           applications_form: Json[]

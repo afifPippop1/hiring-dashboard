@@ -1,6 +1,6 @@
 "use server";
 
-import { ApplicationFormConverter } from "@/lib/application_form/application-fomr-converter";
+import { ApplicationFormConverter } from "@/lib/application_form/application-form-converter";
 import { JobMapper } from "@/lib/job/job-mapper";
 import { JobFormSchema } from "@/lib/job/job.schema";
 import { createClient } from "@/lib/supabase/server";

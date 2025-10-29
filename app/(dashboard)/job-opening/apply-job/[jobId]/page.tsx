@@ -1,6 +1,6 @@
 import { ArrowLeftIcon } from "@/components/icons/arrow-left";
+import { ApplicationForm } from "@/components/shared/application-form/application-form";
 import { Button } from "@/components/ui/button";
-import { ApplicationForm } from "../../../../../components/shared/application-form/application-form";
 
 export default function ApplyJobForm() {
   return (

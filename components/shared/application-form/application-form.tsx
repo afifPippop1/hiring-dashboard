@@ -11,15 +11,20 @@ import { Button } from "@/components/ui/button";
 import { DateOfBirthForm } from "./date-of-birth-form";
 import { PhoneNumberForm } from "./phone-number-form";
 import { DomicileForm } from "./domicile-form";
+import { useParams } from "next/navigation";
+import { submitApplicationAction } from "@/actions/application.action";
 
 export function ApplicationForm() {
+  const { jobId } = useParams<{ jobId: string }>();
   const form = useForm<ApplicationFormSchema>({
     defaultValues: {
       full_name: "",
+      domicile: "",
     },
   });
-  function onSubmit(data: ApplicationFormSchema) {
-    console.log(data);
+  async function onSubmit(data: ApplicationFormSchema) {
+    const response = await submitApplicationAction({ ...data, jobId });
+    console.log(response);
   }
 
   return (
