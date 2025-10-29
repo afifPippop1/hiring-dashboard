@@ -43,7 +43,7 @@ export function JobForm() {
         name="type"
         render={({ field, fieldState }) => (
           <Field>
-            <FieldLabel required>Job Name</FieldLabel>
+            <FieldLabel required>Job Type</FieldLabel>
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select job type" />
@@ -96,24 +96,46 @@ export function JobForm() {
 
       <Label>Job Salary</Label>
       <div className="flex gap-4">
-        <Field className="flex-1">
-          <FieldLabel>Minimum Estimated Salary</FieldLabel>
-          <InputGroup>
-            <InputGroupNumberInput min="0" />
-            <InputGroupAddon>
-              <p className="text-neutral-90">Rp</p>
-            </InputGroupAddon>
-          </InputGroup>
-        </Field>
-        <Field className="flex-1">
-          <FieldLabel>Minimum Estimated Salary</FieldLabel>
-          <InputGroup>
-            <InputGroupNumberInput min="0" />
-            <InputGroupAddon>
-              <p className="text-neutral-90">Rp</p>
-            </InputGroupAddon>
-          </InputGroup>
-        </Field>
+        <Controller
+          control={control}
+          name="minSalary"
+          render={({ field, fieldState }) => (
+            <Field className="flex-1">
+              <FieldLabel>Minimum Estimated Salary</FieldLabel>
+              <InputGroup>
+                <InputGroupNumberInput
+                  min="0"
+                  value={field.value || ""}
+                  onValueChange={(value) => field.onChange(value.floatValue)}
+                />
+                <InputGroupAddon>
+                  <p className="text-neutral-90">Rp</p>
+                </InputGroupAddon>
+              </InputGroup>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+        <Controller
+          control={control}
+          name="maxSalary"
+          render={({ field, fieldState }) => (
+            <Field className="flex-1">
+              <FieldLabel>Maximum Estimated Salary</FieldLabel>
+              <InputGroup>
+                <InputGroupNumberInput
+                  min="0"
+                  value={field.value || ""}
+                  onValueChange={(value) => field.onChange(value.floatValue)}
+                />
+                <InputGroupAddon>
+                  <p className="text-neutral-90">Rp</p>
+                </InputGroupAddon>
+              </InputGroup>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
       </div>
 
       <ApplicationFormBuilder />
