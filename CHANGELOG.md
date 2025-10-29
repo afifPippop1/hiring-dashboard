@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1-alpha.1](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.1-alpha.0...v0.1.1-alpha.1) (2025-10-29)
+
+
+### Features
+
+* 🎸 success message on apply ([04164a6](https://github.com/afifPippop1/hiring-dashboard/commit/04164a6d7300466d8118c141ded3cdb8f77d8168))
+
 ### [0.1.1-alpha.0](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.0...v0.1.1-alpha.0) (2025-10-29)
 
 
