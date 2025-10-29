@@ -9,6 +9,7 @@ import { EmailForm } from "./email-form";
 import { LinkedinLinkForm } from "./linkedin-link-form";
 import { Button } from "@/components/ui/button";
 import { DateOfBirthForm } from "./date-of-birth-form";
+import { PhoneNumberForm } from "./phone-number-form";
 
 export function ApplicationForm() {
   const form = useForm<ApplicationFormSchema>({
@@ -23,6 +24,7 @@ export function ApplicationForm() {
         <PhotoProfileForm />
         <FullnameForm />
         <DateOfBirthForm />
+        <PhoneNumberForm />
         <GenderForm />
         <EmailForm />
         <LinkedinLinkForm />
