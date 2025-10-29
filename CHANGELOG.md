@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1-alpha.0](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.0...v0.1.1-alpha.0) (2025-10-29)
+
+
+### Features
+
+* 🎸 application form validation ([bd7b2d6](https://github.com/afifPippop1/hiring-dashboard/commit/bd7b2d6cd377657f716f8b1744d6b2bfc5cc36b4))
+* 🎸 auth provider ([617314c](https://github.com/afifPippop1/hiring-dashboard/commit/617314c8c4cc95b964acd4d5bda71dd48815ab39))
+* 🎸 domicile form & readme ([b2cc78d](https://github.com/afifPippop1/hiring-dashboard/commit/b2cc78d93c546608fef56724ffc5feb89a0f32c1))
+* 🎸 supabase bucket ([61c55f9](https://github.com/afifPippop1/hiring-dashboard/commit/61c55f900353325fa6dbf0449db34ae71582597f))
+* 🎸 use mutation on create job ([2379ee0](https://github.com/afifPippop1/hiring-dashboard/commit/2379ee094fc703e79f9e187fd890e6d503ee28d7))
+
+
+### Bug Fixes
+
+* 🐛 build error because useSearchParams not wrapped suspense ([9db8b44](https://github.com/afifPippop1/hiring-dashboard/commit/9db8b442ff40f221ca1c3c128c20617a501f66fe))
+
 ## 0.1.0 (2025-10-29)
 
 
