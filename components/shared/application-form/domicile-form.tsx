@@ -1,20 +1,11 @@
 import {
   Command,
-  CommandEmpty,
-  CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
-import { cn } from "@/lib/utils";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -123,10 +114,9 @@ export function DomicileAutocomplete({
       />
       {open && (
         <CommandList>
-          {/* <CommandEmpty>No results found.</CommandEmpty> */}
-          <CommandItem>Calendar</CommandItem>
-          <CommandItem>Search Emoji</CommandItem>
-          <CommandItem>Calculator</CommandItem>
+          {domicileOptions.map((opt) => (
+            <CommandItem key={opt}>{opt}</CommandItem>
+          ))}
         </CommandList>
       )}
     </Command>
