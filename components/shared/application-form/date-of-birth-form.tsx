@@ -1,20 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { DatePicker } from "@/components/ui/date-picker";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
-import { ChevronDownIcon } from "lucide-react";
+import dayjs from "dayjs";
+import { CalendarDays, ChevronDownIcon } from "lucide-react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 export function DateOfBirthForm() {
   const { control } = useFormContext<ApplicationFormSchema>();
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(undefined);
+
   return (
     <Controller
       control={control}
@@ -22,33 +18,32 @@ export function DateOfBirthForm() {
       render={({ field, fieldState }) => (
         <Field>
           <FieldLabel required>Date of birth</FieldLabel>
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className="w-48 justify-between font-normal"
-                whileHover={{ scale: 1 }}
-                whileTap={{ scale: 1 }}
-              >
-                {date ? date.toLocaleDateString() : "Select date"}
-                <ChevronDownIcon />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent
-              className="w-auto overflow-hidden p-0"
-              align="start"
+          <div className="flex">
+            <Button
+              variant="outline"
+              className="w-full justify-between font-normal"
+              whileHover={{ scale: 1 }}
+              whileTap={{ scale: 1 }}
+              onClick={() => setOpen(true)}
             >
-              <Calendar
-                mode="single"
-                selected={date}
-                captionLayout="dropdown"
-                onSelect={(date) => {
-                  setDate(date);
-                  setOpen(false);
-                }}
-              />
-            </PopoverContent>
-          </Popover>
+              <div className="flex items-center gap-2">
+                <CalendarDays />
+                {field.value
+                  ? dayjs(field.value).format("DD MMMM YYYY")
+                  : "Select date"}
+              </div>
+              <ChevronDownIcon />
+            </Button>
+            <DatePicker
+              isOpen={open}
+              onChange={(value) => {
+                field.onChange(value);
+                setOpen(false);
+              }}
+              onClose={() => setOpen(false)}
+              value={field.value}
+            />
+          </div>
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
         </Field>
       )}
