@@ -28,7 +28,7 @@ export function flattenApplication(
 }
 
 export function createTableHeader(cols: CandidateApplicationForm) {
-  const columns: ColumnDef<CandidateApplicationForm>[] = [
+  const columns: ColumnDef<FlattenedCandidateApplicationForm>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -65,6 +65,10 @@ export function createTableHeader(cols: CandidateApplicationForm) {
               <div>{dayjs(row.getValue(col.key)).format("DD MMMM YYYY")}</div>
             );
           }
+          if (col.key === "linkedin_link") {
+            return <a href={row.getValue(col.key)}>{row.getValue(col.key)}</a>;
+          }
+
           return <div>{row.getValue(col.key)}</div>;
         },
       });
