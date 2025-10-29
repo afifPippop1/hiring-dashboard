@@ -9,7 +9,7 @@ type ApplicationFormFields = ApplicationFormField[];
 const applicationFormSchema = z.object({
   full_name: z.string(),
   photo_profile: z.string(),
-  gender: z.enum(["Male", "Female", "Other"]),
+  gender: z.enum(["Male", "Female"]),
   domicile: z.string(),
   email: z.email(),
   phone_number: z.string(),

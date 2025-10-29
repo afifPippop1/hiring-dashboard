@@ -14,10 +14,19 @@ import Link from "next/link";
 import { Logo } from "../ui/logo";
 import { ArrowLeftIcon } from "../icons/arrow-left";
 import { Routes } from "@/lib/routes";
+import { useAuth } from "@/stores/auth-provider";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { BriefcaseBusiness } from "lucide-react";
 
 export function Navbar() {
   const params = useParams<{ jobId?: string }>();
   const segment = useSelectedLayoutSegment();
+  const { user, signOut } = useAuth();
 
   return (
     <nav className="h-16 bg-neutral-10 border border-[#EFEEEE] shadow-button flex items-center justify-between p-6">
@@ -61,10 +70,30 @@ export function Navbar() {
           </Breadcrumb>
         )}
       </section>
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+
+      {!user ? (
+        <Link href={Routes.SignIn}>
+          <Button>Sign In</Button>
+        </Link>
+      ) : (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <Link href={Routes.JobOpening}>
+              <DropdownMenuItem>
+                <BriefcaseBusiness />
+                Job Vacancy
+              </DropdownMenuItem>
+            </Link>
+            <DropdownMenuItem onClick={signOut}>Log out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
     </nav>
   );
 }

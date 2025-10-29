@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useCreateJob } from "@/hooks/use-create-job";
 import { APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE } from "@/lib/application_form/application-form-builder";
 import {
   CURRENCY,
@@ -18,7 +19,6 @@ import {
 } from "@/lib/job/job.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { createJob } from "../../../actions/job.action";
 
 export function JobOpeningDialog({
   open,
@@ -27,6 +27,7 @@ export function JobOpeningDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const createJob = useCreateJob();
   const form = useForm<JobFormSchema>({
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
@@ -38,7 +39,6 @@ export function JobOpeningDialog({
     },
   });
   async function onSubmit(formData: JobFormSchema) {
-    console.log(formData);
     const { error } = await createJob(formData);
     if (!error) {
       console.log(error);

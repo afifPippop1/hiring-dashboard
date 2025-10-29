@@ -4,6 +4,7 @@ import { submitApplicationAction } from "@/actions/application.action";
 import { Button } from "@/components/ui/button";
 import { useJob } from "@/hooks/use-job";
 import {
+  ApplicationFormField,
   ApplicationFormKey,
   ApplicationFormSchema,
 } from "@/lib/application_form/application-form.schema";
@@ -17,6 +18,8 @@ import { GenderForm } from "./gender-form";
 import { LinkedinLinkForm } from "./linkedin-link-form";
 import { PhoneNumberForm } from "./phone-number-form";
 import { PhotoProfileForm } from "./photo-profile-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const ComponentByKey: Record<ApplicationFormKey, React.FC> = {
   full_name: FullnameForm,
@@ -29,17 +32,42 @@ const ComponentByKey: Record<ApplicationFormKey, React.FC> = {
   photo_profile: PhotoProfileForm,
 };
 
+function createSchema(fields: ApplicationFormField[]) {
+  return z.object(
+    fields.reduce((acc, field) => {
+      const fieldType =
+        field.key === "date_of_birth"
+          ? z.date("Required")
+          : field.key === "email"
+          ? z.email("Please enter your email in the format: name@example.com")
+          : z.string(
+              field.key === "linkedin_link"
+                ? "Please copy paste your Linkedin URL, example: https://www.linkedin.com/in/username"
+                : "Required"
+            );
+
+      const fieldValue = !field.validation.required
+        ? fieldType.optional()
+        : fieldType;
+      return {
+        ...acc,
+        [field.key]: fieldValue,
+      };
+    }, {})
+  );
+}
+
 export function ApplicationForm() {
   const { jobId } = useParams<{ jobId: string }>();
   const job = useJob(jobId);
-  const form = useForm<ApplicationFormSchema>({
-    defaultValues: {
-      full_name: "",
-      domicile: "",
-    },
+
+  const schema = createSchema(job?.applicationFormArray || []);
+
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
   });
 
-  async function onSubmit(data: ApplicationFormSchema) {
+  async function onSubmit(data: z.infer<typeof schema>) {
     const response = await submitApplicationAction({ ...data, jobId });
   }
 

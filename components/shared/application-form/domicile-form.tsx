@@ -1,11 +1,11 @@
-import {
-  Command,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
+import { ChevronDown } from "lucide-react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -84,23 +84,66 @@ export function DomicileAutocomplete({
   placeholder = "Choose your domicile",
 }: DomicileAutocompleteProps) {
   const [open, setOpen] = React.useState(false);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+  function makeOpen() {
+    setOpen(true);
+  }
+
+  function makeClose() {
+    setOpen(false);
+  }
+
+  const filteredOptions = domicileOptions.filter((option) =>
+    option.toLowerCase().includes(value.toLowerCase())
+  );
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        makeClose();
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Command>
-      <CommandInput
-        placeholder={placeholder}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setOpen(false)}
-        onValueChange={onChange}
-        value={value}
-      />
-      {open && (
-        <CommandList>
-          {domicileOptions.map((opt) => (
-            <CommandItem key={opt}>{opt}</CommandItem>
-          ))}
-        </CommandList>
-      )}
-    </Command>
+    <div ref={wrapperRef} className="relative">
+      <InputGroup>
+        <InputGroupInput
+          value={value}
+          onFocus={makeOpen}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
+          placeholder={placeholder}
+        />
+        <InputGroupAddon align="inline-end">
+          <ChevronDown className="text-neutral-60" />
+        </InputGroupAddon>
+        {open && filteredOptions.length > 0 && (
+          <div className="bg-neutral-10 max-h-72 absolute top-full mt-1 left-0 w-full shadow-lg border border-neutral-40 z-20 rounded-md overflow-auto">
+            {filteredOptions.map((domicile) => (
+              <div
+                key={domicile}
+                onClick={() => {
+                  onChange(domicile);
+                  makeClose();
+                }}
+                className="flex items-center gap-2 py-2 px-4 cursor-pointer text-sm font-bold hover:bg-primary-surface"
+              >
+                {domicile}
+              </div>
+            ))}
+          </div>
+        )}
+      </InputGroup>
+    </div>
   );
 }

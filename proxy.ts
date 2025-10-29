@@ -1,21 +1,9 @@
-import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
-import { Routes } from "./lib/routes";
+import { type NextRequest } from "next/server";
 
 export async function proxy(request: NextRequest) {
   // update user's auth session
-  const user = await updateSession(request);
-  if (!user && request.nextUrl.pathname === Routes.Home) {
-    return NextResponse.redirect(new URL(Routes.JobOpening, request.url));
-  }
-  if (user && request.nextUrl.pathname === Routes.Home) {
-    return NextResponse.redirect(new URL(Routes.JobList, request.url));
-  }
-
-  if (!user && request.nextUrl.pathname === Routes.JobList) {
-    return NextResponse.redirect(new URL(Routes.SignIn, request.url));
-  }
-  return user;
+  return await updateSession(request);
 }
 
 export const config = {

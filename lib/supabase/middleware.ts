@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { Routes } from "../routes";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -30,7 +31,19 @@ export async function updateSession(request: NextRequest) {
   );
 
   // refreshing the auth token
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user && request.nextUrl.pathname === Routes.Home) {
+    return NextResponse.redirect(new URL(Routes.JobOpening, request.url));
+  }
+  if (user && request.nextUrl.pathname === Routes.Home) {
+    return NextResponse.redirect(new URL(Routes.JobList, request.url));
+  }
+
+  if (!user && request.nextUrl.pathname === Routes.JobList) {
+    return NextResponse.redirect(new URL(Routes.SignIn, request.url));
+  }
 
   return supabaseResponse;
 }

@@ -3,7 +3,7 @@ import {
   ApplicationFormSchema,
 } from "./application-form.schema";
 
-export function applicationFormMapper(form: ApplicationFormSchema) {
+export function applicationFormMapper(form: Partial<ApplicationFormSchema>) {
   const keyOrder: ApplicationFormKey[] = [
     "full_name",
     "email",
