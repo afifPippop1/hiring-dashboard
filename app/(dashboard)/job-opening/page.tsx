@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { EmptyJobOpening } from "./empty-job-opening";
 import { JobOpeningCard } from "./job-opening-card";
 import { JobOpeningDetail } from "./job-opening-detail";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function JobOpening() {
   const searchParams = useSearchParams();
@@ -35,7 +35,9 @@ export default function JobOpening() {
         )}
       >
         {jobs.data.map((job) => (
-          <JobOpeningCard key={job.id} job={job} />
+          <Suspense key={job.id}>
+            <JobOpeningCard job={job} />
+          </Suspense>
         ))}
       </div>
       <div className="px-4 md:px-0 flex flex-col w-full md:w-[719px] max-h-inherit rounded-lg border-none md:border border-neutral-4 scrollbar-transparent md:h-[calc(100dvh-144px)] md:overflow-y-auto lg:flex-1">

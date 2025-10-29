@@ -1,13 +1,13 @@
+import { Suspense } from "react";
 import { ApplyButton } from "./apply-button";
 
-export default function JobOpeningLayout(props: {
-  children: React.ReactNode;
-  params: { jobId: string };
-}) {
+export default function JobOpeningLayout(props: { children: React.ReactNode }) {
   return (
     <>
       {props.children}
-      <ApplyButton />
+      <Suspense>
+        <ApplyButton />
+      </Suspense>
     </>
   );
 }
