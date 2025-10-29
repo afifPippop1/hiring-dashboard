@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "border border-neutral-40 text-neutral-100 shadow-xs hover:bg-accent",
 
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 shadow-none",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -49,6 +49,7 @@ function Button({
   return (
     <motion.button
       data-slot="button"
+      type="button"
       className={cn(buttonVariants({ variant, size, className }))}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -57,4 +58,20 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+function PrimitiveButton({
+  className,
+  variant,
+  size,
+  ...props
+}: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants>) {
+  return (
+    <button
+      data-slot="button"
+      type="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+}
+
+export { Button, buttonVariants, PrimitiveButton };

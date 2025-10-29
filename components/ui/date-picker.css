@@ -1,0 +1,78 @@
+.react-date-picker,
+.react-calendar {
+  font-family: var(--font-sans, "Nunito Sans"), sans-serif;
+  font-size: var(--text-md);
+  color: var(--color-neutral-90);
+}
+
+.react-date-picker__wrapper {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.25rem 0.5rem;
+  box-shadow: var(--shadow-input);
+  transition: border 0.2s, box-shadow 0.2s;
+  display: none;
+}
+
+.react-date-picker__wrapper:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-focus);
+}
+
+.react-calendar {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  padding: 0.5rem;
+}
+
+.react-calendar__navigation button {
+  color: var(--color-neutral-90);
+  font-weight: 600;
+  background: none;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, color 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: var(--color-primary-surface);
+  color: var(--color-primary);
+}
+
+.react-calendar__tile {
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0;
+  font-size: var(--text-md);
+  transition: all 0.2s;
+}
+
+.react-calendar__tile--now {
+  background-color: var(--color-primary-surface);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.react-calendar__tile--active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  font-weight: 700;
+}
+
+.react-calendar__tile--active:enabled:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: var(--color-neutral-60);
+}
+
+.react-calendar__navigation__label {
+  font-weight: 700;
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-size: 0.75em;
+  color: var(--color-neutral-70);
+}
