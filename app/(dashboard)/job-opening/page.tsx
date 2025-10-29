@@ -30,7 +30,7 @@ export default function JobOpening() {
     <div className=" md:px-0 flex md:flex-row flex-col gap-4 md:gap-5 w-full justify-center lg:justify-start">
       <div
         className={cn(
-          "flex flex-col items-stretch gap-4 h-[calc(100dvh-144px)] overflow-y-auto",
+          "flex flex-col items-stretch gap-4 h-[calc(100dvh-144px)] overflow-y-auto md:pr-4",
           externalId && "hidden md:flex"
         )}
       >

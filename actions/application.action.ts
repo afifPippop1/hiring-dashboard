@@ -10,7 +10,7 @@ import { createClient } from "@/lib/supabase/server";
 export async function submitApplicationAction({
   jobId,
   ...formData
-}: ApplicationFormSchema & { jobId: string }) {
+}: Partial<ApplicationFormSchema> & { jobId: string }) {
   const supabase = await createClient();
 
   const { data, error } = await supabase.from("applications").insert({

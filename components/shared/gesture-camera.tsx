@@ -4,10 +4,13 @@ import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 
-export default function GestureCamera() {
+export default function GestureCamera({
+  onChange,
+}: {
+  onChange: (photo: string) => void;
+}) {
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [photo, setPhoto] = useState<string | null>(null);
   const [poseStep, setPoseStep] = useState(3);
   const [countdown, setCountdown] = useState<number | null>(null);
   const [isCapturing, setIsCapturing] = useState(false);
@@ -88,7 +91,7 @@ export default function GestureCamera() {
           clearInterval(timer);
           setCountdown(null);
           const screenshot = webcamRef.current?.getScreenshot();
-          if (screenshot) setPhoto(screenshot);
+          if (screenshot) onChange(screenshot);
           setPoseStep(3);
           setTimeout(() => setIsCapturing(false), 2000);
         } else {
@@ -98,7 +101,7 @@ export default function GestureCamera() {
     }
 
     return () => clearInterval(interval);
-  }, [poseStep, isCapturing]);
+  }, [poseStep, isCapturing, onChange]);
 
   return (
     <div className="relative flex flex-col items-center">
