@@ -5,6 +5,7 @@ import { useJobOpening } from "./job-opening.provider";
 import { Button } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
 import Link from "next/link";
+import { Routes } from "@/lib/routes";
 
 export function JobOpeningDetail() {
   const { job } = useJobOpening();
@@ -17,7 +18,7 @@ export function JobOpeningDetail() {
           <Badge variant="success">{job.type}</Badge>
           <h1 className="text-xl font-bold">{job.title}</h1>
         </section>
-        <Link href={`/job-opening/apply-job/${job.id}`}>
+        <Link href={`${Routes.ApplyJob}/${job.id}`}>
           <Button variant="secondary">Apply</Button>
         </Link>
       </div>
