@@ -64,11 +64,7 @@ export function DomicileForm() {
       render={({ field, fieldState }) => (
         <Field>
           <FieldLabel required>Domicile</FieldLabel>
-          <DomicileAutocomplete
-            value={field.value}
-            onChange={field.onChange}
-            options={domicileOptions}
-          />
+          <DomicileAutocomplete value={field.value} onChange={field.onChange} />
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
         </Field>
       )}
@@ -79,29 +75,15 @@ export function DomicileForm() {
 interface DomicileAutocompleteProps {
   value?: string;
   onChange: (value: string) => void;
-  options: string[];
   placeholder?: string;
 }
 
 export function DomicileAutocomplete({
   value = "",
   onChange,
-  options,
   placeholder = "Choose your domicile",
 }: DomicileAutocompleteProps) {
   const [open, setOpen] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState(value);
-
-  // Filter options dynamically
-  const filtered = options.filter((opt) =>
-    opt.toLowerCase().includes(inputValue.toLowerCase())
-  );
-
-  const handleSelect = (selected: string) => {
-    onChange(selected);
-    setInputValue(selected);
-    setOpen(false);
-  };
 
   return (
     <Command>

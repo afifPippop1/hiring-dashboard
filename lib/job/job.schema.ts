@@ -1,5 +1,6 @@
 import z from "zod";
 import { applicationFormBuilderSchema } from "../application_form/application-form-builder";
+import { ApplicationFormField } from "../application_form/application-form.schema";
 
 // JOB TYPE
 const JOB_TYPE = {

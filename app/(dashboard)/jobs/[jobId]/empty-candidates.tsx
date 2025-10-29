@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function EmptyCandidates() {
   return (
-    <div className="flex-1 flex items-center justify-center rounded-md border border-neutral-40 shadow-[#0000001A]">
+    <div className="flex-1 flex items-center justify-center ">
       <div className="flex flex-col">
         <Image
           src={EMPTY_CANDIDATES_ASSET}

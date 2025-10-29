@@ -1,15 +1,18 @@
-import { ApplicationFormKey, ApplicationFormSchema } from "./application-form.schema";
+import {
+  ApplicationFormKey,
+  ApplicationFormSchema,
+} from "./application-form.schema";
 
 export function applicationFormMapper(form: ApplicationFormSchema) {
-  const keyOrder: (ApplicationFormKey)[] = [
+  const keyOrder: ApplicationFormKey[] = [
     "full_name",
     "email",
     "phone_number",
+    "date_of_birth",
     "domicile",
     "gender",
     "linkedin_link",
     "photo_profile",
-    "date_of_birth",
   ];
 
   return keyOrder

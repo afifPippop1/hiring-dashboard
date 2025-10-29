@@ -18,13 +18,32 @@ const applicationFormSchema = z.object({
 });
 
 type ApplicationFormSchema = z.infer<typeof applicationFormSchema>;
+
 type ApplicationFormKey = keyof ApplicationFormSchema;
+
+type ApplicationFormAttributes = {
+  key: ApplicationFormKey;
+  label: string;
+  value: ApplicationFormSchema[ApplicationFormKey];
+  order: number;
+};
+type CandidateApplicationForm = {
+  id: string;
+  attributes: ApplicationFormAttributes[];
+};
+
+type FlattenedCandidateApplicationForm = { id: string } & {
+  [key in ApplicationFormKey]: ApplicationFormSchema[key];
+};
 
 export { applicationFormSchema };
 
 export type {
-  ApplicationFormSchema,
-  ApplicationFormKey,
+  ApplicationFormAttributes,
   ApplicationFormField,
   ApplicationFormFields,
+  ApplicationFormKey,
+  ApplicationFormSchema,
+  CandidateApplicationForm,
+  FlattenedCandidateApplicationForm,
 };

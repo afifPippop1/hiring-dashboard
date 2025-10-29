@@ -53,6 +53,5 @@ export async function getJob(id: string) {
   if (error) {
     throw error;
   }
-  const normalizedData = JobMapper.fromSupabase(data);
-  return normalizedData;
+  return data;
 }
