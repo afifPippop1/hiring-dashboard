@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { Routes } from "@/lib/routes";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getSignInErrorMessage } from "./sign-in-error-message";
+import { Spinner } from "@/components/ui/spinner";
 
 export function SignInForm() {
   const form = useForm<SignInSchema>({
@@ -77,6 +78,7 @@ export function SignInForm() {
             className="w-full"
             type="submit"
             disabled={form.formState.isSubmitting}
+            loading={form.formState.isSubmitting}
           >
             Masuk
           </Button>
