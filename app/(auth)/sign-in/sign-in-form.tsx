@@ -1,20 +1,19 @@
 "use client";
 
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
 import { Form, FormControl, FormItem, FormLabel } from "@/components/ui/form";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { signInSchema, SignInSchema } from "./sign-in.schema";
-import { signInAction } from "./action";
-import React from "react";
-import { useRouter } from "next/navigation";
 import { Routes } from "@/lib/routes";
-import { Alert, AlertTitle } from "@/components/ui/alert";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { signInAction } from "./action";
 import { getSignInErrorMessage } from "./sign-in-error-message";
-import { Spinner } from "@/components/ui/spinner";
+import { signInSchema, SignInSchema } from "./sign-in.schema";
 
 export function SignInForm() {
   const form = useForm<SignInSchema>({

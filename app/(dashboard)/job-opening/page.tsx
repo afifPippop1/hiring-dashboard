@@ -1,11 +1,12 @@
 "use client";
+import { Spinner } from "@/components/ui/spinner";
 import { useJobs } from "@/hooks/use-jobs";
 import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense } from "react";
 import { EmptyJobOpening } from "./empty-job-opening";
 import { JobOpeningCard } from "./job-opening-card";
 import { JobOpeningDetail } from "./job-opening-detail";
-import React, { Suspense } from "react";
 
 export default function JobOpening() {
   const searchParams = useSearchParams();
@@ -24,7 +25,14 @@ export default function JobOpening() {
     }
   }, [externalId, jobs.data, router, searchParams]);
 
-  if (!jobs.data?.length) return <EmptyJobOpening />;
+  if (!jobs.data?.length && !jobs.isLoading) return <EmptyJobOpening />;
+
+  if (jobs.isLoading)
+    return (
+      <div className="flex items-center justify-center h-full w-full">
+        <Spinner className="size-20 text-primary" />
+      </div>
+    );
 
   return (
     <div className=" md:px-0 flex md:flex-row flex-col gap-4 md:gap-5 w-full justify-center lg:justify-start">
@@ -34,7 +42,7 @@ export default function JobOpening() {
           externalId && "hidden md:flex"
         )}
       >
-        {jobs.data.map((job) => (
+        {jobs.data?.map((job) => (
           <Suspense key={job.id}>
             <JobOpeningCard job={job} />
           </Suspense>

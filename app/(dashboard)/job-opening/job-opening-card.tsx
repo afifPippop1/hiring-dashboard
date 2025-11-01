@@ -14,10 +14,7 @@ export function JobOpeningCard({ job }: { job: Job }) {
     const currentParams = new URLSearchParams(searchParams);
     currentParams.set("external_id", job.id); // Set or update a parameter
 
-    // Use router.push or router.replace to update the URL
     router.push(`?${currentParams.toString()}`);
-    // Or, to replace the current history entry:
-    // router.replace(`?${currentParams.toString()}`);
   };
 
   const active = searchParams.get("external_id") === job.id;
