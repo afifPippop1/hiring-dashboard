@@ -11,14 +11,16 @@ export default function Jobspage() {
   if (!jobs.data?.length && !jobs.isLoading) return <EmptyJobList />;
 
   return (
-    <div className="flex items-start overflow-auto gap-6">
+    <div className="flex items-start gap-6">
       <div className="flex-1 flex flex-col items-stretch gap-4">
         {jobs.isLoading && [1, 2, 3].map((i) => <JobCardSkeleton key={i} />)}
         {jobs.data?.map((job) => (
           <JobCard key={job.id} job={job} />
         ))}
       </div>
-      <CreateJobCard />
+      <div className="sticky top-0 self-start">
+        <CreateJobCard />
+      </div>
     </div>
   );
 }
