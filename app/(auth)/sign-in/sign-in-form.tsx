@@ -9,13 +9,15 @@ import { Input } from "@/components/ui/input";
 import { Routes } from "@/lib/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import { signInAction } from "./action";
 import { getSignInErrorMessage } from "./sign-in-error-message";
 import { signInSchema, SignInSchema } from "./sign-in.schema";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function SignInForm() {
+  const queryClient = useQueryClient();
   const form = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -34,6 +36,7 @@ export function SignInForm() {
     const { data, error } = await signInAction(d);
     setFormMessage({ success: !!data.user, error: error?.message });
     if (data.user) {
+      queryClient.invalidateQueries({ queryKey: ["me"] });
       router.push(Routes.JobList);
     }
   }
