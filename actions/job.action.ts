@@ -35,7 +35,8 @@ export async function getJobList() {
     .from("jobs")
     .select(
       "id, title, descriptions, type, candidate_needed, salary_currency, min_salary, max_salary, status, created_at, updated_at"
-    );
+    )
+    .order("created_at", { ascending: false });
   if (error) {
     throw error;
   }

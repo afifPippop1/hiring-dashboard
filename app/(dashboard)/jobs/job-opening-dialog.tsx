@@ -19,6 +19,7 @@ import {
 } from "@/lib/job/job.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function JobOpeningDialog({
   open,
@@ -40,13 +41,14 @@ export function JobOpeningDialog({
   });
   async function onSubmit(formData: JobFormSchema) {
     const { error } = await createJob(formData);
-    if (!error) {
-      console.log(error);
+    if (error?.message) {
+      toast.error(`Failed to create job: ${error?.message}`);
+    } else {
+      toast.success(`Job created successfully`);
     }
     form.reset();
     onOpenChange(false);
   }
-  console.log(form.formState.errors);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -63,7 +65,11 @@ export function JobOpeningDialog({
               <JobForm />
             </div>
             <DialogFooter className="border-t border-t-neutral-40 p-4">
-              <Button type="submit" disabled={form.formState.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={form.formState.isSubmitting}
+                loading={form.formState.isSubmitting}
+              >
                 Publish Job
               </Button>
             </DialogFooter>
