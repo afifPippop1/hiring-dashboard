@@ -6,10 +6,14 @@ import { useJob } from "@/hooks/use-job";
 import {
   ApplicationFormField,
   ApplicationFormKey,
-  ApplicationFormSchema,
 } from "@/lib/application_form/application-form.schema";
+import { SUCCESS_APPLY_ASSET } from "@/lib/assets";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import z from "zod";
+import { EmptyState } from "../empty-state";
 import { DateOfBirthForm } from "./date-of-birth-form";
 import { DomicileForm } from "./domicile-form";
 import { EmailForm } from "./email-form";
@@ -18,11 +22,7 @@ import { GenderForm } from "./gender-form";
 import { LinkedinLinkForm } from "./linkedin-link-form";
 import { PhoneNumberForm } from "./phone-number-form";
 import { PhotoProfileForm } from "./photo-profile-form";
-import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { EmptyState } from "../empty-state";
-import { SUCCESS_APPLY_ASSET } from "@/lib/assets";
+import { Spinner } from "@/components/ui/spinner";
 
 const ComponentByKey: Record<
   ApplicationFormKey,
@@ -81,6 +81,13 @@ export function ApplicationForm() {
     }
   }
 
+  if (job.isLoading)
+    return (
+      <div className="flex items-center justify-center h-full w-full">
+        <Spinner className="size-20 text-primary" />
+      </div>
+    );
+
   if (appliedSuccess) {
     return (
       <EmptyState
@@ -103,7 +110,13 @@ export function ApplicationForm() {
             <Component key={field.key} required={field.validation.required} />
           );
         })}
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          loading={form.formState.isSubmitting}
+        >
+          Submit
+        </Button>
       </form>
     </FormProvider>
   );
