@@ -18,7 +18,7 @@ const AuthContext = React.createContext<IAuthContext>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = React.useState<User | null>(null);
   const router = useRouter();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["me"],
     queryFn: getUser,
   });
@@ -36,6 +36,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(data.data.user);
     }
   }, [data]);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <AuthContext.Provider value={{ user, signOut: signOutFn }}>
