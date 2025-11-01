@@ -12,7 +12,7 @@ export function useCreateJob() {
   function createJobFn(formData: JobFormSchema) {
     return createJobMutation.mutateAsync(formData, {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["job-list"] });
+        queryClient.invalidateQueries({ queryKey: ["job-list"], exact: false });
       },
     });
   }

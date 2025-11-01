@@ -29,14 +29,19 @@ export async function createJob(formData: JobFormSchema) {
   return { data, error };
 }
 
-export async function getJobList() {
+export async function getJobList({ query }: { query?: string }) {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const q = supabase
     .from("jobs")
     .select(
       "id, title, descriptions, type, candidate_needed, salary_currency, min_salary, max_salary, status, created_at, updated_at"
-    )
-    .order("created_at", { ascending: false });
+    );
+  if (query) {
+    q.ilike("title", `%${query}%`);
+  }
+
+  const { data, error } = await q.order("created_at", { ascending: false });
+
   if (error) {
     throw error;
   }
