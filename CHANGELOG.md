@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.2...v0.1.3) (2025-11-01)
+
+
+### Features
+
+* 🎸 success message on apply ([5c8d846](https://github.com/afifPippop1/hiring-dashboard/commit/5c8d8462295e7e67ee3e1a5f406518a7c12761e4))
+
+
+### Bug Fixes
+
+* 🐛 apply job form loader ([70ee5ec](https://github.com/afifPippop1/hiring-dashboard/commit/70ee5ec55dfc247d96c31078cf2c8343ccda1b36))
+* 🐛 create job card fixed position ([d024f70](https://github.com/afifPippop1/hiring-dashboard/commit/d024f70d2689a41f3b95ecdff5791fb4822a34c2))
+* 🐛 invalidate user on sign in ([6b6f47f](https://github.com/afifPippop1/hiring-dashboard/commit/6b6f47f33163db2670d2cdbd5192b74f363f7bfe))
+* 🐛 job opening loader ([e95f88a](https://github.com/afifPippop1/hiring-dashboard/commit/e95f88a0f1d2c7b5b2b560a62b49ecc57d248d55))
+* 🐛 loading button ([ddda0e7](https://github.com/afifPippop1/hiring-dashboard/commit/ddda0e7e3341724b16b4124a31e10ea1585ed700))
+* 🐛 toaster dialog ([bff36a5](https://github.com/afifPippop1/hiring-dashboard/commit/bff36a5a079f3494fdf1aa66ecb5723eedc43572))
+* 🐛 user provider state ([24bc6ba](https://github.com/afifPippop1/hiring-dashboard/commit/24bc6ba67441053268a104d612fa805eabb8c067))
+
 ### [0.1.2](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.1...v0.1.2) (2025-10-29)
 
 ### [0.1.1](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.1-alpha.0...v0.1.1) (2025-10-29)
