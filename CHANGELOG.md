@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.3...v0.1.4) (2025-11-01)
+
+
+### Bug Fixes
+
+* 🐛 search query ([7763797](https://github.com/afifPippop1/hiring-dashboard/commit/7763797d1514fb9374dfe696491075a4811295ff))
+
 ### [0.1.3](https://github.com/afifPippop1/hiring-dashboard/compare/v0.1.2...v0.1.3) (2025-11-01)
 
 
