@@ -5,7 +5,6 @@ import { ApplicationFormSchema } from "@/lib/application_form/application-form.s
 import { Controller, useFormContext } from "react-hook-form";
 
 export function GenderForm({ required }: { required?: boolean }) {
-  console.log(required);
   const { control } = useFormContext<ApplicationFormSchema>();
   return (
     <Controller
