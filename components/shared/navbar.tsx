@@ -21,7 +21,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { BriefcaseBusiness } from "lucide-react";
+import { BriefcaseBusiness, LogOutIcon } from "lucide-react";
 
 export function Navbar() {
   const params = useParams<{ jobId?: string }>();
@@ -90,7 +90,9 @@ export function Navbar() {
                 Job Vacancy
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem onClick={signOut}>Log out</DropdownMenuItem>
+            <DropdownMenuItem onClick={signOut}>
+              <LogOutIcon /> Log out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )}

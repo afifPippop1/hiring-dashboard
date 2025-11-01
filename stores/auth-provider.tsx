@@ -32,10 +32,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   React.useEffect(() => {
-    if (data?.data) {
+    if (data?.data.user) {
       setUser(data.data.user);
     }
-  }, [data]);
+  }, [data?.data.user]);
 
   if (isLoading) {
     return null;
