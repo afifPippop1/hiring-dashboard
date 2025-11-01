@@ -8,7 +8,9 @@ export default function DashboardLayout({
   return (
     <div className="h-full flex flex-col items-stretch">
       <Navbar />
-      <div className="flex-1 p-6 overflow-x-hidden">{children}</div>
+      <div className="flex-1 p-6 overflow-x-hidden overflow-y-auto relative">
+        {children}
+      </div>
     </div>
   );
 }
