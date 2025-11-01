@@ -40,7 +40,8 @@ export async function getApplicationsAction(jobId: string) {
   const { data, error } = await supabase
     .from("applications")
     .select("*")
-    .eq("job_id", jobId);
+    .eq("job_id", jobId)
+    .order("created_at", { ascending: false });
 
   const normalizedData = data?.map((application) => {
     return {
