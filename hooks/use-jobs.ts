@@ -1,8 +1,10 @@
+"use client";
+
 import { getJobList } from "@/actions/job.action";
 import { useQuery } from "@tanstack/react-query";
 
 export function useJobs() {
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["job-list"],
     queryFn: getJobList,
   });
@@ -10,5 +12,6 @@ export function useJobs() {
   return {
     data,
     error,
+    isLoading,
   };
 }
