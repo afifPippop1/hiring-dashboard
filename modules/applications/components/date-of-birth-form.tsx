@@ -23,7 +23,7 @@ export function DateOfBirthForm({ required }: { required?: boolean }) {
             <Button
               variant="outline"
               className={cn(
-                "w-full justify-between font-normal h-9 bg-input/30 text-sm text-neutral-60",
+                "w-full justify-between font-normal h-9 bg-transparent text-sm text-neutral-60 hover:bg-transparent",
                 open && "border-ring ring-ring/60 ring-[3px]"
               )}
               whileHover={{ scale: 1 }}
