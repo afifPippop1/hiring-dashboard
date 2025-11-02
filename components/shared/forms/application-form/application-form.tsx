@@ -13,7 +13,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import z from "zod";
-import { EmptyState } from "../empty-state";
+import { EmptyState } from "../../empty-state";
 import { DateOfBirthForm } from "./date-of-birth-form";
 import { DomicileForm } from "./domicile-form";
 import { EmailForm } from "./email-form";

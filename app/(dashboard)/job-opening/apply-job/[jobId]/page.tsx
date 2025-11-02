@@ -1,4 +1,4 @@
-import { ApplicationForm } from "@/components/shared/application-form/application-form";
+import { ApplicationForm } from "@/components/shared/forms/application-form/application-form";
 import { Button } from "@/components/ui/button";
 import { Routes } from "@/lib/routes";
 import { ArrowLeft } from "lucide-react";
