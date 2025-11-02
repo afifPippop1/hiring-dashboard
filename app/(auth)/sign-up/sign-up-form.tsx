@@ -72,7 +72,7 @@ export function SignUpForm() {
 
           <Controller
             control={form.control}
-            name="email"
+            name="password"
             render={({ field, fieldState }) => (
               <Field>
                 <FieldLabel required>Password</FieldLabel>
