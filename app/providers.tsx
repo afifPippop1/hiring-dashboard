@@ -1,7 +1,7 @@
 "use client";
 import { getQueryClient } from "@/lib/get-query-client";
-import { AuthProvider } from "@/stores/auth-provider";
-import { JobOpeningProvider } from "@/stores/job-opening.provider";
+import { AuthProvider } from "@/context/auth-context";
+import { JobOpeningProvider } from "@/context/job-opening-context";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 

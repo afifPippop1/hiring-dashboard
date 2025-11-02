@@ -8,7 +8,7 @@ interface IJobOpeningContext {
   job: Job | null;
 }
 
-const JobOpeningContext = React.createContext<IJobOpeningContext>({
+export const JobOpeningContext = React.createContext<IJobOpeningContext>({
   job: null,
 });
 

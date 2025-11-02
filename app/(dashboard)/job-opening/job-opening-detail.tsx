@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
 import { Routes } from "@/lib/routes";
 import Link from "next/link";
-import { useJobOpening } from "../../../stores/job-opening.provider";
 import { formatMinMaxSalary } from "@/lib/utils";
 import { Banknote, BriefcaseBusiness } from "lucide-react";
+import { useJobOpening } from "@/hooks/use-job-opening";
 
 export function JobOpeningDetail() {
   const { job } = useJobOpening();

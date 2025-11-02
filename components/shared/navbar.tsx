@@ -14,7 +14,6 @@ import Link from "next/link";
 import { Logo } from "../ui/logo";
 import { ArrowLeftIcon } from "../icons/arrow-left";
 import { Routes } from "@/lib/routes";
-import { useAuth } from "@/stores/auth-provider";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { BriefcaseBusiness, LogOutIcon } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
 
 export function Navbar() {
   const params = useParams<{ jobId?: string }>();

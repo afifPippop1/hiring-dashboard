@@ -10,7 +10,7 @@ interface IAuthContext {
   signOut: () => void;
 }
 
-const AuthContext = React.createContext<IAuthContext>({
+export const AuthContext = React.createContext<IAuthContext>({
   user: null,
   signOut: () => {},
 });
@@ -46,14 +46,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const ctx = React.useContext(AuthContext);
-
-  if (!ctx) {
-    throw new Error("useAuth must be used within a <AuthProvider />");
-  }
-
-  return ctx;
 }
