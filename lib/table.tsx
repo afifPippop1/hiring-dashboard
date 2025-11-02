@@ -1,11 +1,11 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { ColumnDef } from "@tanstack/react-table";
 import {
   ApplicationFormKey,
   ApplicationFormSchema,
   CandidateApplicationForm,
   FlattenedCandidateApplicationForm,
-} from "./application_form/application-form.schema";
+} from "@/modules/applications";
+import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 

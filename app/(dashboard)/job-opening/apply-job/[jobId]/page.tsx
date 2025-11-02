@@ -1,21 +1,25 @@
-import { ArrowLeftIcon } from "@/components/icons/arrow-left";
-import { ApplicationForm } from "@/components/shared/application-form/application-form";
 import { Button } from "@/components/ui/button";
 import { Routes } from "@/lib/routes";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { JobTitle } from "./job-title";
+import { ApplicationForm } from "@/modules/applications";
+import { JOB_SEARCH_PARAM } from "@/modules/jobs";
 
 export default async function ApplyJobForm(props: {
   params: { jobId: string };
 }) {
   const params = await props.params;
+
   return (
     <div className="flex justify-center">
       <div className="md:max-w-[700px] bg-neutral-10 w-full rounded-md p-10 flex flex-col items-stretch gap-6">
         <div className="flex items-center gap-4">
-          <Link href={`${Routes.JobOpening}?external_id=${params.jobId}`}>
+          <Link
+            href={`${Routes.JobOpening}?${JOB_SEARCH_PARAM}=${params.jobId}`}
+          >
             <Button variant="outline" size="icon-sm">
-              <ArrowLeftIcon />
+              <ArrowLeft color="#404040" />
             </Button>
           </Link>
           <JobTitle />

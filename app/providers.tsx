@@ -1,7 +1,7 @@
 "use client";
+import { AuthProvider } from "@/context/auth-context";
 import { getQueryClient } from "@/lib/get-query-client";
-import { AuthProvider } from "@/stores/auth-provider";
-import { JobOpeningProvider } from "@/stores/job-opening.provider";
+import { PublicJobProvider } from "@/modules/jobs";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 
@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <React.Suspense>
-          <JobOpeningProvider>{children}</JobOpeningProvider>
+          <PublicJobProvider>{children}</PublicJobProvider>
         </React.Suspense>
       </AuthProvider>
     </QueryClientProvider>

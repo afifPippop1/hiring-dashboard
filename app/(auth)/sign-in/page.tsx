@@ -1,12 +1,12 @@
+import { SignInForm } from "@/modules/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
-import Link from "next/link";
-import { SignInForm } from "./sign-in-form";
 import { Routes } from "@/lib/routes";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-6">
       <Logo />
       <Card className="w-[500px]">
         <CardContent className="flex flex-col gap-3">

@@ -1,16 +1,20 @@
 "use client";
+
 import { Spinner } from "@/components/ui/spinner";
-import { useJobs } from "@/hooks/use-jobs";
 import { cn } from "@/lib/utils";
+import {
+  EmptyPublicJob,
+  JOB_SEARCH_PARAM,
+  PublicJobCard,
+  PublicJobDetail,
+  useJobs,
+} from "@/modules/jobs";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
-import { EmptyJobOpening } from "./empty-job-opening";
-import { JobOpeningCard } from "./job-opening-card";
-import { JobOpeningDetail } from "./job-opening-detail";
 
 export default function JobOpening() {
   const searchParams = useSearchParams();
-  const externalId = searchParams.get("external_id");
+  const externalId = searchParams.get(JOB_SEARCH_PARAM);
   const jobs = useJobs();
   const router = useRouter();
 
@@ -19,13 +23,13 @@ export default function JobOpening() {
       const firstJob = jobs.data[0];
 
       const currentParams = new URLSearchParams(searchParams);
-      currentParams.set("external_id", firstJob.id);
+      currentParams.set(JOB_SEARCH_PARAM, firstJob.id);
 
       router.push(`?${currentParams.toString()}`);
     }
   }, [externalId, jobs.data, router, searchParams]);
 
-  if (!jobs.data?.length && !jobs.isLoading) return <EmptyJobOpening />;
+  if (!jobs.data?.length && !jobs.isLoading) return <EmptyPublicJob />;
 
   if (jobs.isLoading)
     return (
@@ -44,12 +48,12 @@ export default function JobOpening() {
       >
         {jobs.data?.map((job) => (
           <Suspense key={job.id}>
-            <JobOpeningCard job={job} />
+            <PublicJobCard job={job} />
           </Suspense>
         ))}
       </div>
       <div className="px-4 md:px-0 flex flex-col w-full md:w-[719px] max-h-inherit rounded-lg border-none md:border border-neutral-4 scrollbar-transparent md:h-[calc(100dvh-144px)] md:overflow-y-auto lg:flex-1">
-        <JobOpeningDetail />
+        <PublicJobDetail />
       </div>
     </div>
   );

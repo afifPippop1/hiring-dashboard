@@ -1,10 +1,9 @@
 "use client";
 
-import { ApplicationsTable } from "@/components/shared/applications-table";
 import { useApplication } from "@/hooks/use-application";
 import { useJob } from "@/hooks/use-job";
+import { ApplicantsTable, EmptyCandidates } from "@/modules/jobs";
 import { useParams } from "next/navigation";
-import { EmptyCandidates } from "./empty-candidates";
 
 export default function JobDetail() {
   const params = useParams<{ jobId: string }>();
@@ -19,7 +18,7 @@ export default function JobDetail() {
         {!application.data || application.data.length === 0 ? (
           <EmptyCandidates />
         ) : (
-          <ApplicationsTable candidates={application.data} />
+          <ApplicantsTable applicants={application.data} />
         )}
       </div>
     </div>
