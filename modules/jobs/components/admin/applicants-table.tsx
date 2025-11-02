@@ -1,18 +1,9 @@
 "use client";
 
 import {
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-  VisibilityState,
+  flexRender
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
-import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,8 +21,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { createTableHeader, flattenApplication } from "@/lib/table";
 import { CandidateApplicationForm } from "@/modules/applications";
+import { useApplicantTable } from "../../hooks";
 
 export type Payment = {
   id: string;
@@ -45,40 +36,7 @@ export function ApplicantsTable({
 }: {
   applicants: CandidateApplicationForm[];
 }) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
-  const mappedCandidates = React.useMemo(
-    () => applicants.map((applicant) => flattenApplication(applicant)),
-    [applicants]
-  );
-  const columns = React.useMemo(
-    () => createTableHeader(applicants[0]),
-    [applicants]
-  );
-
-  const table = useReactTable({
-    data: mappedCandidates,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  });
+  const { table, columns } = useApplicantTable(applicants);
 
   return (
     <div className="w-full">
