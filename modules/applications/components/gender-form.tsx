@@ -14,18 +14,18 @@ export function GenderForm({ required }: { required?: boolean }) {
         <Field>
           <FieldLabel required={required}>Pronoun (gender)</FieldLabel>
           <RadioGroup
-            onChange={field.onChange}
+            onValueChange={field.onChange}
             value={field.value}
             onBlur={field.onBlur}
             className="flex gap-6 items-center"
           >
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Female" />
-              <Label>She/her (Female)</Label>
+              <RadioGroupItem value="Female" id="Female" />
+              <Label htmlFor="Female">She/her (Female)</Label>
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Male" />
-              <Label>He/him (Male)</Label>
+              <RadioGroupItem value="Male" id="Male" />
+              <Label htmlFor="Male">He/him (Male)</Label>
             </div>
           </RadioGroup>
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
