@@ -1,9 +1,9 @@
-import { ApplicationForm } from "@/components/shared/forms/application-form/application-form";
 import { Button } from "@/components/ui/button";
 import { Routes } from "@/lib/routes";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { JobTitle } from "./job-title";
+import { ApplicationForm } from "@/modules/applications";
 
 export default async function ApplyJobForm(props: {
   params: { jobId: string };

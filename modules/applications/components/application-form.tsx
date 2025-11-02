@@ -13,7 +13,6 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import z from "zod";
-import { EmptyState } from "../../empty-state";
 import { DateOfBirthForm } from "./date-of-birth-form";
 import { DomicileForm } from "./domicile-form";
 import { EmailForm } from "./email-form";
@@ -23,6 +22,7 @@ import { LinkedinLinkForm } from "./linkedin-link-form";
 import { PhoneNumberForm } from "./phone-number-form";
 import { PhotoProfileForm } from "./photo-profile-form";
 import { Spinner } from "@/components/ui/spinner";
+import { EmptyState } from "@/components/shared/empty-state";
 
 const ComponentByKey: Record<
   ApplicationFormKey,
