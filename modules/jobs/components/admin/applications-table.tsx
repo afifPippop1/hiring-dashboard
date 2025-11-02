@@ -40,10 +40,10 @@ export type Payment = {
   email: string;
 };
 
-export function ApplicationsTable({
-  candidates,
+export function ApplicantsTable({
+  applicants,
 }: {
-  candidates: CandidateApplicationForm[];
+  applicants: CandidateApplicationForm[];
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -53,12 +53,12 @@ export function ApplicationsTable({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const mappedCandidates = React.useMemo(
-    () => candidates.map((candidate) => flattenApplication(candidate)),
-    [candidates]
+    () => applicants.map((applicant) => flattenApplication(applicant)),
+    [applicants]
   );
   const columns = React.useMemo(
-    () => createTableHeader(candidates[0]),
-    [candidates]
+    () => createTableHeader(applicants[0]),
+    [applicants]
   );
 
   const table = useReactTable({

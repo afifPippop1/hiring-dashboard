@@ -6,6 +6,8 @@ export * from "./admin/job-form";
 export * from "./admin/job-list";
 export * from "./admin/job-provider";
 export * from "./admin/job-search-input";
+export * from "./admin/empty-candidates";
+export * from "./admin/applications-table";
 
 export * from "./public/footer-apply-button";
 export * from "./public/empty-public-job";
