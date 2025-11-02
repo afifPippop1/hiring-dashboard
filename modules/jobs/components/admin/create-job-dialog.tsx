@@ -1,6 +1,6 @@
 "use client";
 
-import { JobForm } from "@/modules/jobs/components/job-form";
+import { JobForm } from "@/modules/jobs/components/admin/job-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

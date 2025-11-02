@@ -1,12 +1,14 @@
 "use client";
 import { Spinner } from "@/components/ui/spinner";
-import { useJobs } from "@/modules/jobs";
 import { cn } from "@/lib/utils";
+import {
+  EmptyJobOpening,
+  JobOpeningCard,
+  JobOpeningDetail,
+  useJobs,
+} from "@/modules/jobs";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
-import { EmptyJobOpening } from "./empty-job-opening";
-import { JobOpeningCard } from "./job-opening-card";
-import { JobOpeningDetail } from "./job-opening-detail";
 
 export default function JobOpening() {
   const searchParams = useSearchParams();
