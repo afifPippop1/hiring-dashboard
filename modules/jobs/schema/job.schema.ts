@@ -1,36 +1,10 @@
 import z from "zod";
-import { applicationFormBuilderSchema } from "../application_form/application-form-builder";
-import { ApplicationFormField } from "../application_form/application-form.schema";
+import { applicationFormBuilderSchema } from "@/lib/application_form/application-form-builder";
+import { JOB_STATUS_ENUM, JOB_TYPE_ENUM } from "../constants";
 
-// JOB TYPE
-const JOB_TYPE = {
-  Fulltime: "Full-time",
-  Contract: "Contract",
-  Parttime: "Part-time",
-  Internship: "Internship",
-  Freelance: "Freelance",
-} as const;
-
-const JOB_TYPE_ENUM = [
-  JOB_TYPE.Fulltime,
-  JOB_TYPE.Contract,
-  JOB_TYPE.Parttime,
-  JOB_TYPE.Internship,
-  JOB_TYPE.Freelance,
-] as const;
 type JobType = (typeof JOB_TYPE_ENUM)[number];
 
 // JOB STATUS
-const JOB_STATUS = {
-  Active: "Active",
-  Inactive: "Inactive",
-  Draft: "Draft",
-} as const;
-const JOB_STATUS_ENUM = [
-  JOB_STATUS.Active,
-  JOB_STATUS.Inactive,
-  JOB_STATUS.Draft,
-] as const;
 type JobStatus = (typeof JOB_STATUS_ENUM)[number];
 
 const CURRENCY = {
@@ -63,13 +37,6 @@ type Job = Omit<JobFormSchema, "applicationsForm"> &
     updatedAt?: string;
   };
 
-export {
-  JOB_TYPE,
-  JOB_TYPE_ENUM,
-  JOB_STATUS,
-  JOB_STATUS_ENUM,
-  jobFormSchema,
-  CURRENCY,
-};
+export { CURRENCY, JOB_STATUS_ENUM, jobFormSchema };
 
-export type { JobFormSchema, JobType, JobStatus, Job, CurrencyType };
+export type { CurrencyType, Job, JobFormSchema, JobStatus, JobType };

@@ -1,6 +1,6 @@
 "use client";
 
-import { JobForm } from "@/components/shared/job-form";
+import { JobForm } from "@/modules/jobs/components/job-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,7 +16,7 @@ import {
   JOB_STATUS,
   jobFormSchema,
   JobFormSchema,
-} from "@/lib/job/job.schema";
+} from "@/modules/jobs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";

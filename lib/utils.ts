@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { CURRENCY } from "./job/job.schema";
+import { CURRENCY } from "../modules/jobs";
 import { HANDPOSE_1, HANDPOSE_2, HANDPOSE_3 } from "./assets";
 
 export function cn(...inputs: ClassValue[]) {

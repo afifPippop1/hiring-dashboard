@@ -1,26 +1,26 @@
 "use client";
 
 import { Controller, useFormContext } from "react-hook-form";
-import { Divider } from "../ui/divider";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { Divider } from "@/components/ui/divider";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupNumberInput,
-} from "../ui/input-group";
-import { Label } from "../ui/label";
-import { NumberInput } from "../ui/number-input";
+} from "@/components/ui/input-group";
+import { Label } from "@/components/ui/label";
+import { NumberInput } from "@/components/ui/number-input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Textarea } from "../ui/textarea";
-import { ApplicationFormBuilder } from "./application-form-builder";
-import { JOB_TYPE_ENUM, JobFormSchema } from "@/lib/job/job.schema";
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { ApplicationFormBuilder } from "@/components/shared/application-form-builder";
+import { JOB_TYPE_ENUM, JobFormSchema } from "@/modules/jobs";
 
 export function JobForm() {
   const { control } = useFormContext<JobFormSchema>();

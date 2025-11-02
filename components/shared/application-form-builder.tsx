@@ -5,7 +5,7 @@ import {
   ApplicationFormFieldOption,
 } from "@/lib/application_form/application-form-builder";
 import { ApplicationFormKey } from "@/lib/application_form/application-form.schema";
-import { JobFormSchema } from "@/lib/job/job.schema";
+import { JobFormSchema } from "@/modules/jobs";
 import { Controller, useFormContext } from "react-hook-form";
 import Chip from "../ui/chip";
 

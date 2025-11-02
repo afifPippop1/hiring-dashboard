@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Job } from "@/lib/job/job.schema";
+import { Job } from "@/modules/jobs";
 import { formatMinMaxSalary } from "@/lib/utils";
 import { Banknote, BriefcaseBusiness } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
