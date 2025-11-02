@@ -7,7 +7,7 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
 import { Routes } from "@/lib/routes";
-import { signUpSchema, SignUpSchema } from "@/schema/sign-up.schema";
+import { signUpSchema, SignUpSchema } from "../schema/sign-up.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React from "react";

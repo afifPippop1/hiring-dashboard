@@ -1,4 +1,4 @@
-import { SignInForm } from "@/components/shared/forms/sign-in/sign-in-form";
+import { SignInForm } from "@/modules/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { Routes } from "@/lib/routes";

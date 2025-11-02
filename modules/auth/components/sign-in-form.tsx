@@ -1,6 +1,6 @@
 "use client";
 
-import { signInAction } from "@/actions/action";
+import { signInAction } from "@/actions/sign-in.action";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
@@ -9,7 +9,7 @@ import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
 import { Routes } from "@/lib/routes";
 import { getSignInErrorMessage } from "@/lib/sign-in-error-message";
-import { signInSchema, SignInSchema } from "@/schema/sign-in.schema";
+import { signInSchema, SignInSchema } from "../schema/sign-in.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

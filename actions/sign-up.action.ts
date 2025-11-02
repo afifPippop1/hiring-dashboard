@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { SignUpSchema } from "@/schema/sign-up.schema";
+import { SignUpSchema } from "@/modules/auth/schema/sign-up.schema";
 
 export async function signUpAction({ email, password }: SignUpSchema) {
   const supabase = await createClient();
