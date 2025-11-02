@@ -1,18 +1,18 @@
 "use client";
 
+import { signUpAction } from "@/actions/sign-up.action";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
 import { Routes } from "@/lib/routes";
+import { signUpSchema, SignUpSchema } from "@/schema/sign-up.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { SignUpErrorMessage } from "./sign-up-error-message";
-import { signUpAction } from "./sign-up.action";
-import { signUpSchema, SignUpSchema } from "./sign-up.schema";
 
 export function SignUpForm() {
   const router = useRouter();

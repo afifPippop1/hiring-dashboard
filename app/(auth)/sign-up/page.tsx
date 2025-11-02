@@ -1,8 +1,8 @@
+import { SignUpForm } from "@/components/shared/forms/sign-up/sign-up-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
-import Link from "next/link";
-import { SignUpForm } from "./sign-up-form";
 import { Routes } from "@/lib/routes";
+import Link from "next/link";
 
 export default function SignUpPage() {
   return (
