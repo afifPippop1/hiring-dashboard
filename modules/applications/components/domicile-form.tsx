@@ -128,7 +128,7 @@ export function DomicileAutocomplete({
           <ChevronDown className="text-neutral-60" />
         </InputGroupAddon>
         {open && filteredOptions.length > 0 && (
-          <div className="bg-neutral-10 max-h-72 absolute top-full mt-1 left-0 w-full shadow-lg border border-neutral-40 z-20 rounded-md overflow-auto">
+          <div className="bg-neutral-10 max-h-72 absolute top-full mt-2 left-0 w-full shadow-lg border border-neutral-40 z-20 rounded-md overflow-auto">
             {filteredOptions.map((domicile) => (
               <div
                 key={domicile}
