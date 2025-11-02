@@ -3,7 +3,7 @@
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
-import { Form, FormControl, FormItem, FormLabel } from "@/components/ui/form";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { Input } from "@/components/ui/input";
 import { Routes } from "@/lib/routes";
@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { signInAction } from "./action";
 import { getSignInErrorMessage } from "./sign-in-error-message";
 import { signInSchema, SignInSchema } from "./sign-in.schema";
@@ -42,7 +42,7 @@ export function SignInForm() {
   }
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col items-stretch gap-4">
           {formMessage?.error && (
@@ -60,19 +60,34 @@ export function SignInForm() {
             </Alert>
           )}
 
-          <FormItem>
-            <FormLabel>Alamat email</FormLabel>
-            <FormControl autoFocus>
-              <Input {...form.register("email")} />
-            </FormControl>
-          </FormItem>
+          <Controller
+            control={form.control}
+            name="email"
+            render={({ field, fieldState }) => (
+              <Field>
+                <FieldLabel>Alamat email</FieldLabel>
+                <Input type="email" placeholder="Email address" {...field} />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
 
-          <FormItem>
-            <FormLabel>Password</FormLabel>
-            <FormControl>
-              <Input {...form.register("password")} type="password" />
-            </FormControl>
-          </FormItem>
+          <Controller
+            control={form.control}
+            name="password"
+            render={({ field, fieldState }) => (
+              <Field>
+                <FieldLabel>Password</FieldLabel>
+                <Input placeholder="Password" type="password" {...field} />
+
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
 
           <Button
             variant="secondary"
@@ -97,6 +112,6 @@ export function SignInForm() {
           </Button>
         </div>
       </form>
-    </Form>
+    </FormProvider>
   );
 }
