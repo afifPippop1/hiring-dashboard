@@ -1,8 +1,8 @@
+import { SignInForm } from "@/components/shared/forms/sign-in-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
-import Link from "next/link";
-import { SignInForm } from "./sign-in-form";
 import { Routes } from "@/lib/routes";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
