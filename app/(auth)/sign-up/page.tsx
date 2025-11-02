@@ -6,7 +6,7 @@ import { Routes } from "@/lib/routes";
 
 export default function SignUpPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-6">
       <Logo />
       <Card className="w-[500px]">
         <CardContent className="flex flex-col gap-3">
