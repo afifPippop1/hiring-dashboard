@@ -1,23 +1,23 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Job } from "@/modules/jobs";
 import { formatMinMaxSalary } from "@/lib/utils";
+import { Job, JOB_SEARCH_PARAM } from "@/modules/jobs";
 import { Banknote, BriefcaseBusiness } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export function JobOpeningCard({ job }: { job: Job }) {
+export function PublicJobCard({ job }: { job: Job }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const updateQueryParam = () => {
     const currentParams = new URLSearchParams(searchParams);
-    currentParams.set("external_id", job.id); // Set or update a parameter
+    currentParams.set(JOB_SEARCH_PARAM, job.id); // Set or update a parameter
 
     router.push(`?${currentParams.toString()}`);
   };
 
-  const active = searchParams.get("external_id") === job.id;
+  const active = searchParams.get(JOB_SEARCH_PARAM) === job.id;
 
   return (
     <Card

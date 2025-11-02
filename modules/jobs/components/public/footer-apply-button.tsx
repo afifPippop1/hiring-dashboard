@@ -5,11 +5,13 @@ import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams, useSelectedLayoutSegment } from "next/navigation";
+import { JOB_SEARCH_PARAM } from "../../constants";
 
-export function ApplyButton() {
+export function FooterApplyButton() {
   const segment = useSelectedLayoutSegment();
   const searchParams = useSearchParams();
-  const jobId = searchParams.get("external_id");
+  const jobId = searchParams.get(JOB_SEARCH_PARAM);
+
   return (
     <div
       className={cn(

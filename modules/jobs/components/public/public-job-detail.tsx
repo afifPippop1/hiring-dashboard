@@ -7,10 +7,11 @@ import { Routes } from "@/lib/routes";
 import Link from "next/link";
 import { formatMinMaxSalary } from "@/lib/utils";
 import { Banknote, BriefcaseBusiness } from "lucide-react";
-import { useJobOpening } from "@/hooks/use-job-opening";
 
-export function JobOpeningDetail() {
-  const { job } = useJobOpening();
+import { usePublicJob } from "../../hooks/use-public-job";
+
+export function PublicJobDetail() {
+  const { job } = usePublicJob();
   if (!job) return <></>;
 
   return (

@@ -1,7 +1,7 @@
 import { EmptyState } from "@/components/shared/empty-state";
 import { EMPTY_JOB_ASSET } from "@/lib/assets";
 
-export function EmptyJobOpening() {
+export function EmptyPublicJob() {
   return (
     <EmptyState
       src={EMPTY_JOB_ASSET}
