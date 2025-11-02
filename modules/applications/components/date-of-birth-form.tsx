@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
+import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
 import { CalendarDays, ChevronDownIcon } from "lucide-react";
 import React from "react";
@@ -21,16 +22,21 @@ export function DateOfBirthForm({ required }: { required?: boolean }) {
           <div className="flex">
             <Button
               variant="outline"
-              className="w-full justify-between font-normal"
+              className={cn(
+                "w-full justify-between font-normal h-9 bg-input/30 text-sm text-neutral-60",
+                open && "border-ring ring-ring/60 ring-[3px]"
+              )}
               whileHover={{ scale: 1 }}
               whileTap={{ scale: 1 }}
               onClick={() => setOpen(true)}
             >
               <div className="flex items-center gap-2">
                 <CalendarDays />
-                {field.value
-                  ? dayjs(field.value).format("DD MMMM YYYY")
-                  : "Select date"}
+                <p className={field.value ? "text-neutral-90" : ""}>
+                  {field.value
+                    ? dayjs(field.value).format("DD MMMM YYYY")
+                    : "Select date"}
+                </p>
               </div>
               <ChevronDownIcon />
             </Button>
