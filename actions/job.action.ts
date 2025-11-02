@@ -1,9 +1,9 @@
 "use server";
 
-import { ApplicationFormConverter } from "@/lib/application_form/application-form-converter";
-import { JobMapper } from "@/lib/job/job-mapper";
-import { JobFormSchema } from "@/lib/job/job.schema";
+import { JobMapper } from "@/modules/jobs";
+import { JobFormSchema } from "@/modules/jobs";
 import { createClient } from "@/lib/supabase/server";
+import { ApplicationFormConverter } from "@/modules/applications";
 
 export async function createJob(formData: JobFormSchema) {
   const supabase = await createClient();

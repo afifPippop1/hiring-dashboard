@@ -1,12 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
-import Link from "next/link";
-import { SignUpForm } from "./sign-up-form";
 import { Routes } from "@/lib/routes";
+import { SignUpForm } from "@/modules/auth";
+import Link from "next/link";
 
 export default function SignUpPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-6">
       <Logo />
       <Card className="w-[500px]">
         <CardContent className="flex flex-col gap-3">

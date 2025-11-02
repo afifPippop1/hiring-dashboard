@@ -43,32 +43,34 @@ export default function GestureCamera({
         const detector = detectorRef.current;
         if (!detector) return;
 
-        const results = await detector.detectForVideo(video, Date.now());
         const ctx = canvasRef.current?.getContext("2d");
         if (!ctx) return;
 
-        // Clear the canvas each frame
+        if (
+          ctx.canvas.width !== video.videoWidth ||
+          ctx.canvas.height !== video.videoHeight
+        ) {
+          ctx.canvas.width = video.videoWidth;
+          ctx.canvas.height = video.videoHeight;
+        }
+
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        const results = await detector.detectForVideo(video, Date.now());
 
         if (!results.landmarks || results.landmarks.length === 0) return;
 
         const landmarks = results.landmarks[0];
-        const boundingBox = getBoundingBox(landmarks, video);
+        const boundingBox = getBoundingBox(landmarks, ctx.canvas);
 
         const raisedFingers = detectRaisedFingers(landmarks);
-        const isCorrectPose =
-          (poseStep === 3 && raisedFingers === 2) ||
-          (poseStep === 2 && raisedFingers <= 1);
+        const isCorrectPose = raisedFingers <= 4 && raisedFingers > 1;
 
         drawBoundingBox(ctx, boundingBox, isCorrectPose);
 
-        // Draw small circles on fingertips
-        drawLandmarks(ctx, landmarks, isCorrectPose);
-
-        // Pose sequence logic
-        if (poseStep === 3 && raisedFingers === 2) {
+        if (poseStep === 3 && raisedFingers === 3) {
           setPoseStep(2);
-        } else if (poseStep === 2 && raisedFingers <= 1) {
+        } else if (poseStep === 2 && raisedFingers <= 2) {
           setPoseStep(1);
 
           const now = Date.now();
@@ -77,7 +79,7 @@ export default function GestureCamera({
             startCountdownAndCapture();
           }
         }
-      }, 200);
+      }, 500);
     })();
 
     async function startCountdownAndCapture() {
@@ -117,41 +119,34 @@ export default function GestureCamera({
       />
 
       {countdown && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-6xl font-bold">
+        <div className="absolute inset-0 flex flex-col gap-4 items-center justify-center bg-black/40 text-white text-6xl font-bold">
+          <p className="text-md">Capturing in:</p>
           {countdown}
         </div>
       )}
-
-      <p className="text-sm text-neutral-600 mt-2">
-        Pose {poseStep} → show next pose ({poseStep - 1})
-      </p>
-
-      {/* {photo && (
-        <div className="mt-2">
-          <img
-            src={photo}
-            alt="Captured"
-            className="rounded-md border w-40 h-40 object-cover"
-          />
-        </div>
-      )} */}
     </div>
   );
 }
 
-// === Helper functions ===
-
 function getBoundingBox(
   landmarks: { x: number; y: number }[],
-  video: HTMLVideoElement
+  canvas: HTMLCanvasElement
 ) {
-  const xs = landmarks.map((p) => p.x * video.videoWidth);
-  const ys = landmarks.map((p) => p.y * video.videoHeight);
+  const xs = landmarks.map((p) => p.x * canvas.width);
+  const ys = landmarks.map((p) => p.y * canvas.height);
   const minX = Math.min(...xs);
   const minY = Math.min(...ys);
   const maxX = Math.max(...xs);
   const maxY = Math.max(...ys);
-  return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
+  let x = Math.floor(minX - 10);
+  let y = Math.floor(minY - 10);
+  let width = Math.ceil(maxX - minX + 20);
+  let height = Math.ceil(maxY - minY + 20);
+  x = Math.max(0, x);
+  y = Math.max(0, y);
+  width = Math.min(canvas.width - x, width);
+  height = Math.min(canvas.height - y, height);
+  return { x, y, width, height };
 }
 
 function drawBoundingBox(
@@ -159,22 +154,13 @@ function drawBoundingBox(
   box: { x: number; y: number; width: number; height: number },
   isCorrect: boolean
 ) {
-  ctx.strokeStyle = isCorrect ? "lime" : "red";
+  ctx.fillStyle = isCorrect
+    ? "rgba(67, 147, 108, 0.3)"
+    : "rgba(255, 20, 40, 0.3)";
+  ctx.strokeStyle = isCorrect ? "#43936c" : "#e11428";
   ctx.lineWidth = 4;
+  ctx.fillRect(box.x, box.y, box.width, box.height);
   ctx.strokeRect(box.x, box.y, box.width, box.height);
-}
-
-function drawLandmarks(
-  ctx: CanvasRenderingContext2D,
-  landmarks: { x: number; y: number }[],
-  isCorrect: boolean
-) {
-  ctx.fillStyle = isCorrect ? "lime" : "red";
-  for (const p of landmarks) {
-    ctx.beginPath();
-    ctx.arc(p.x * ctx.canvas.width, p.y * ctx.canvas.height, 4, 0, 2 * Math.PI);
-    ctx.fill();
-  }
 }
 
 function detectRaisedFingers(landmarks: { x: number; y: number }[]): number {

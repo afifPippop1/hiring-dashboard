@@ -1,13 +1,13 @@
 "use server";
 
-import { applicationFormMapper } from "@/lib/application_form/application-form-mapper";
-import {
-  ApplicationFormAttributes,
-  ApplicationFormSchema,
-} from "@/lib/application_form/application-form.schema";
 import { supabaseBucket } from "@/lib/supabase/bucket";
 import { createClient } from "@/lib/supabase/server";
 import { dataURLtoFile } from "@/lib/utils";
+import {
+  ApplicationFormAttributes,
+  applicationFormMapper,
+  ApplicationFormSchema,
+} from "@/modules/applications";
 import { v4 as uuid } from "uuid";
 
 export async function submitApplicationAction({
