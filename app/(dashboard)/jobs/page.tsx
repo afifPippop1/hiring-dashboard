@@ -5,7 +5,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { useJobs } from "@/hooks/use-jobs";
+import { useJobs } from "@/modules/jobs";
 import { debounce } from "lodash";
 import { Search, X } from "lucide-react";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";

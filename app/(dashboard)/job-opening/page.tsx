@@ -1,6 +1,6 @@
 "use client";
 import { Spinner } from "@/components/ui/spinner";
-import { useJobs } from "@/hooks/use-jobs";
+import { useJobs } from "@/modules/jobs";
 import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
