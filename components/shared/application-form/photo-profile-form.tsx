@@ -1,14 +1,14 @@
-import { UploadIcon } from "@/components/icons/upload";
 import { Button } from "@/components/ui/button";
 import { Field, FieldError } from "@/components/ui/field";
 import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { AVATAR_THUMBNAIL_ASSET } from "@/lib/assets";
+import { Upload } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { CapturePhotoProfileDialog } from "./capture-photo-profile-dialog";
 
-export function PhotoProfileForm(_: { required?: boolean }) {
+export function PhotoProfileForm() {
   const { control } = useFormContext<ApplicationFormSchema>();
   const [openPhotoProfileDialog, setOpenPhotoProfileDialog] =
     React.useState(false);
@@ -35,7 +35,7 @@ export function PhotoProfileForm(_: { required?: boolean }) {
               />
             </div>
             <Button variant="outline" onClick={handleOpenPhotoProfileDialog}>
-              <UploadIcon />
+              <Upload color="#404040" />
               Take a Picture
             </Button>
             <CapturePhotoProfileDialog

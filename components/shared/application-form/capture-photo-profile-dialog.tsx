@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from "@/components/icons/chevron-right";
 import GestureCamera from "@/components/shared/gesture-camera";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { getHandposeAsset } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 export function CapturePhotoProfileDialog(props: {
@@ -52,9 +52,9 @@ export function CapturePhotoProfileDialog(props: {
               {/* Gesture demonstration */}
               <section className="flex items-center gap-2 justify-center">
                 <GestureDemonstrationBox pose={1} />
-                <ChevronRightIcon />
+                <ChevronRight color="#404040" />
                 <GestureDemonstrationBox pose={2} />
-                <ChevronRightIcon />
+                <ChevronRight color="#404040" />
                 <GestureDemonstrationBox pose={3} />
               </section>
             </>

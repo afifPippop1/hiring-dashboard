@@ -1,8 +1,11 @@
 "use client";
 
+import { useAuth } from "@/hooks/use-auth";
+import { Routes } from "@/lib/routes";
+import { ArrowLeft, BriefcaseBusiness, LogOutIcon } from "lucide-react";
+import Link from "next/link";
 import { useParams, useSelectedLayoutSegment } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Button } from "../ui/button";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,18 +13,14 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
-import Link from "next/link";
-import { Logo } from "../ui/logo";
-import { ArrowLeftIcon } from "../icons/arrow-left";
-import { Routes } from "@/lib/routes";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { BriefcaseBusiness, LogOutIcon } from "lucide-react";
-import { useAuth } from "@/hooks/use-auth";
+import { Logo } from "../ui/logo";
 
 export function Navbar() {
   const params = useParams<{ jobId?: string }>();
@@ -34,7 +33,7 @@ export function Navbar() {
         {segment === "job-opening" && (
           <Link href={Routes.JobOpening} className="md:hidden">
             <Button variant="outline" size="icon-sm">
-              <ArrowLeftIcon />
+              <ArrowLeft />
             </Button>
           </Link>
         )}
