@@ -1,7 +1,7 @@
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { Controller, useFormContext } from "react-hook-form";
+import { ApplicationFormSchema } from "../types";
 
 export function EmailForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();

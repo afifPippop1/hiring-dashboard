@@ -1,18 +1,17 @@
 "use client";
 
 import { submitApplicationAction } from "@/actions/application.action";
+import { EmptyState } from "@/components/shared/empty-state";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { useJob } from "@/hooks/use-job";
-import {
-  ApplicationFormField,
-  ApplicationFormKey,
-} from "@/lib/application_form/application-form.schema";
 import { SUCCESS_APPLY_ASSET } from "@/lib/assets";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import z from "zod";
+import { ApplicationFormField, ApplicationFormKey } from "../types";
 import { DateOfBirthForm } from "./date-of-birth-form";
 import { DomicileForm } from "./domicile-form";
 import { EmailForm } from "./email-form";
@@ -21,8 +20,6 @@ import { GenderForm } from "./gender-form";
 import { LinkedinLinkForm } from "./linkedin-link-form";
 import { PhoneNumberForm } from "./phone-number-form";
 import { PhotoProfileForm } from "./photo-profile-form";
-import { Spinner } from "@/components/ui/spinner";
-import { EmptyState } from "@/components/shared/empty-state";
 
 const ComponentByKey: Record<
   ApplicationFormKey,

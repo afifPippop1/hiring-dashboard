@@ -1,8 +1,8 @@
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { Controller, useFormContext } from "react-hook-form";
+import { ApplicationFormSchema } from "../types";
 
 export function GenderForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();

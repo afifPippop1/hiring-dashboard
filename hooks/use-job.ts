@@ -1,5 +1,5 @@
 import { getJob } from "@/actions/job.action";
-import { ApplicationFormField } from "@/lib/application_form/application-form.schema";
+import { ApplicationFormField } from "@/modules/applications";
 import { JobMapper } from "@/modules/jobs";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";

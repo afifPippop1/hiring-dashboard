@@ -1,6 +1,5 @@
 "use client";
 
-import { JobForm } from "@/modules/jobs/components/admin/job-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,13 +9,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useCreateJob } from "@/hooks/use-create-job";
-import { APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE } from "@/lib/application_form/application-form-builder";
+import { APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE } from "@/modules/applications";
 import {
   CURRENCY,
   JOB_STATUS,
   jobFormSchema,
   JobFormSchema,
 } from "@/modules/jobs";
+import { JobForm } from "@/modules/jobs/components/admin/job-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";

@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
 import { CalendarDays, ChevronDownIcon } from "lucide-react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { ApplicationFormSchema } from "../types";
 
 export function DateOfBirthForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();

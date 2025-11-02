@@ -1,15 +1,15 @@
 "use client";
 
+import Chip from "@/components/ui/chip";
 import {
   APPLICATION_FORM_FIELDS_BUILDER_OPTIONS,
   ApplicationFormFieldOption,
-} from "@/lib/application_form/application-form-builder";
-import { ApplicationFormKey } from "@/lib/application_form/application-form.schema";
+  ApplicationFormKey,
+} from "@/modules/applications";
 import { JobFormSchema } from "@/modules/jobs";
 import { Controller, useFormContext } from "react-hook-form";
-import Chip from "../ui/chip";
 
-export function ApplicationFormBuilder() {
+export function ApplicationForm() {
   return (
     <div className="p-4 border border-neutral-30 rounded-md">
       <h3 className="text-md font-bold">

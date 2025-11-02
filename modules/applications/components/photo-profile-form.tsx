@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldError } from "@/components/ui/field";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { AVATAR_THUMBNAIL_ASSET } from "@/lib/assets";
 import { Upload } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { ApplicationFormSchema } from "../types";
 import { CapturePhotoProfileDialog } from "./capture-photo-profile-dialog";
 
 export function PhotoProfileForm() {

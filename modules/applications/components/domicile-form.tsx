@@ -4,10 +4,10 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { ApplicationFormSchema } from "../types";
 
 export const domicileOptions = [
   "Kabupaten Aceh Barat - Aceh",

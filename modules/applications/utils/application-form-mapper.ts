@@ -1,7 +1,4 @@
-import {
-  ApplicationFormKey,
-  ApplicationFormSchema,
-} from "./application-form.schema";
+import { ApplicationFormKey, ApplicationFormSchema } from "../types";
 
 export function applicationFormMapper(form: Partial<ApplicationFormSchema>) {
   const keyOrder: ApplicationFormKey[] = [

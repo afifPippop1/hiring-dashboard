@@ -1,24 +1,7 @@
-import z from "zod";
-import {
-  ApplicationFormKey,
-  applicationFormSchema,
-} from "./application-form.schema";
+import { ApplicationFormFieldOption, ApplicationFormKey } from "../types";
+import { APPLICATION_FORM_FIELD_OPTIONS } from "./application-form-field-option.constant";
 
-const APPLICATION_FORM_FIELD_OPTIONS = {
-  Mandatory: "Mandatory",
-  Optional: "Optional",
-  Off: "Off",
-} as const;
-
-type ApplicationFormFieldOptionValue =
-  (typeof APPLICATION_FORM_FIELD_OPTIONS)[keyof typeof APPLICATION_FORM_FIELD_OPTIONS];
-
-type ApplicationFormFieldOption = {
-  value: ApplicationFormFieldOptionValue;
-  selectable: boolean;
-};
-
-const APPLICATION_FORM_FIELDS_BUILDER_OPTIONS: {
+export const APPLICATION_FORM_FIELDS_BUILDER_OPTIONS: {
   field: ApplicationFormKey;
   label: string;
   options: ApplicationFormFieldOption[];
@@ -96,46 +79,3 @@ const APPLICATION_FORM_FIELDS_BUILDER_OPTIONS: {
     ],
   },
 ] as const;
-
-const FIELD_OPTIONS = z.enum([
-  APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-  APPLICATION_FORM_FIELD_OPTIONS.Optional,
-  APPLICATION_FORM_FIELD_OPTIONS.Off,
-] as const);
-
-const fieldsShape = Object.fromEntries(
-  (Object.keys(applicationFormSchema.shape) as ApplicationFormKey[]).map(
-    (key) => [key, FIELD_OPTIONS]
-  )
-) as Record<ApplicationFormKey, typeof FIELD_OPTIONS>;
-
-const applicationFormBuilderSchema = z.object(fieldsShape);
-
-type ApplicationFormBuilderSchema = z.infer<
-  typeof applicationFormBuilderSchema
->;
-
-const APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE: ApplicationFormBuilderSchema =
-  {
-    photo_profile: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    full_name: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    email: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    gender: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    date_of_birth: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    domicile: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    phone_number: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-    linkedin_link: APPLICATION_FORM_FIELD_OPTIONS.Mandatory,
-  } as const;
-
-export {
-  APPLICATION_FORM_FIELD_OPTIONS,
-  APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE,
-  APPLICATION_FORM_FIELDS_BUILDER_OPTIONS,
-  applicationFormBuilderSchema,
-};
-
-export type {
-  ApplicationFormBuilderSchema,
-  ApplicationFormFieldOption,
-  ApplicationFormFieldOptionValue,
-};

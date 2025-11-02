@@ -1,9 +1,8 @@
 import {
   APPLICATION_FORM_FIELD_OPTIONS,
   APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE,
-  ApplicationFormBuilderSchema,
-} from "./application-form-builder";
-import { ApplicationFormFields } from "./application-form.schema";
+} from "../constants";
+import { ApplicationFormBuilderSchema, ApplicationFormFields } from "../types";
 
 export class ApplicationFormConverter {
   static toObject(data: ApplicationFormFields): ApplicationFormBuilderSchema {

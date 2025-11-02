@@ -1,4 +1,4 @@
-import { applicationFormBuilderSchema } from "@/lib/application_form/application-form-builder";
+import { applicationFormBuilderSchema } from "@/modules/applications";
 import z from "zod";
 import { CURRENCY, JOB_STATUS_ENUM, JOB_TYPE_ENUM } from "../constants";
 

@@ -1,8 +1,8 @@
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { ApplicationFormSchema } from "@/lib/application_form/application-form.schema";
 import { Controller, useFormContext } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { ApplicationFormSchema } from "../types";
 
 export function PhoneNumberForm({ required }: { required?: boolean }) {
   const { control } = useFormContext<ApplicationFormSchema>();

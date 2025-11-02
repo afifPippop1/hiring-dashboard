@@ -1,6 +1,8 @@
-import { ApplicationFormConverter } from "@/lib/application_form/application-form-converter";
-import { ApplicationFormFields } from "@/lib/application_form/application-form.schema";
 import { Database } from "@/lib/supabase/types";
+import {
+  ApplicationFormConverter,
+  ApplicationFormFields,
+} from "@/modules/applications";
 import { CurrencyType, Job, JobStatus, JobType } from "@/modules/jobs";
 
 type SupabaseJob = Database["public"]["Tables"]["jobs"]["Row"];

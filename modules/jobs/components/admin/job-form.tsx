@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ApplicationFormBuilder } from "@/components/shared/application-form-builder";
+import { ApplicationForm } from "@/modules/jobs/components/admin/application-form-builder";
 import { JOB_TYPE_ENUM, JobFormSchema } from "@/modules/jobs";
 
 export function JobForm() {
@@ -138,7 +138,7 @@ export function JobForm() {
         />
       </div>
 
-      <ApplicationFormBuilder />
+      <ApplicationForm />
     </div>
   );
 }
