@@ -51,11 +51,11 @@ export function CapturePhotoProfileDialog(props: {
               </p>
               {/* Gesture demonstration */}
               <section className="flex items-center gap-2 justify-center">
-                <GestureDemonstrationBox pose={1} />
+                <GestureDemonstrationBox pose={3} />
                 <ChevronRight color="#404040" />
                 <GestureDemonstrationBox pose={2} />
                 <ChevronRight color="#404040" />
-                <GestureDemonstrationBox pose={3} />
+                <GestureDemonstrationBox pose={1} />
               </section>
             </>
           ) : (
