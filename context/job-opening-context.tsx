@@ -1,4 +1,5 @@
 "use client";
+
 import { useJob } from "@/hooks/use-job";
 import { Job } from "@/lib/job/job.schema";
 import { useSearchParams } from "next/navigation";
