@@ -1,18 +1,10 @@
 import { ApplicationFormKey, ApplicationFormSchema } from "../types";
 
-export function applicationFormMapper(form: Partial<ApplicationFormSchema>) {
-  const keyOrder: ApplicationFormKey[] = [
-    "full_name",
-    "email",
-    "phone_number",
-    "date_of_birth",
-    "domicile",
-    "gender",
-    "linkedin_link",
-    "photo_profile",
-  ];
-
-  return keyOrder
+export function generateOrderedApplicationFields(
+  form: Partial<ApplicationFormSchema>,
+  order: ApplicationFormKey[]
+) {
+  return order
     .filter((key) => form[key] !== undefined && form[key] !== null)
     .map((key, index) => ({
       key,

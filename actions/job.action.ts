@@ -11,9 +11,10 @@ export async function createJob(formData: JobFormSchema) {
   if (!user.data.user)
     return { data: null, error: { message: "Unauthorized" } };
 
-  const normalizedApplicationFormData = ApplicationFormConverter.fromObject(
+  const normalizedApplicationFormData = ApplicationFormConverter.toOrderedList(
     formData.applicationsForm
   );
+
   const { data, error } = await supabase.from("jobs").insert({
     title: formData.title,
     descriptions: formData.descriptions,

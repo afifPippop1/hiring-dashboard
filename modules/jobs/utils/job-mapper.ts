@@ -24,9 +24,10 @@ export class JobMapper {
     };
 
     if (row.applications_form) {
-      dto.applicationsForm = ApplicationFormConverter.toObject(
-        (row.applications_form ?? []) as ApplicationFormFields
-      );
+      dto.applicationsForm =
+        ApplicationFormConverter.toApplicationFieldOptionObject(
+          (row.applications_form ?? []) as ApplicationFormFields
+        );
     }
 
     return dto;
@@ -43,7 +44,7 @@ export class JobMapper {
       max_salary: job.maxSalary ?? null,
       status: job.status,
       applications_form: job.applicationsForm
-        ? ApplicationFormConverter.fromObject(job.applicationsForm)
+        ? ApplicationFormConverter.toOrderedList(job.applicationsForm)
         : [],
       created_at: job.createdAt,
       updated_at: job.updatedAt ?? null,

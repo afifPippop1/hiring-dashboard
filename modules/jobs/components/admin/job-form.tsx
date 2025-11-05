@@ -1,6 +1,5 @@
 "use client";
 
-import { Controller, useFormContext } from "react-hook-form";
 import { Divider } from "@/components/ui/divider";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -19,8 +18,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ApplicationForm } from "@/modules/jobs/components/admin/application-form-builder";
 import { JOB_TYPE_ENUM, JobFormSchema } from "@/modules/jobs";
+import { Controller, useFormContext } from "react-hook-form";
+import { JobApplicationChecklistForm } from "./job-application-form-checklist";
 
 export function JobForm() {
   const { control } = useFormContext<JobFormSchema>();
@@ -138,7 +138,7 @@ export function JobForm() {
         />
       </div>
 
-      <ApplicationForm />
+      <JobApplicationChecklistForm />
     </div>
   );
 }

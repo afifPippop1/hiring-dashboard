@@ -5,8 +5,9 @@ import { createClient } from "@/lib/supabase/server";
 import { dataURLtoFile } from "@/lib/utils";
 import {
   ApplicationFormAttributes,
-  applicationFormMapper,
   ApplicationFormSchema,
+  generateOrderedApplicationFields,
+  submitApplicationOrder,
 } from "@/modules/applications";
 import { v4 as uuid } from "uuid";
 
@@ -29,7 +30,7 @@ export async function submitApplicationAction({
 
   const { data, error } = await supabase.from("applications").insert({
     job_id: jobId,
-    attributes: applicationFormMapper(formData),
+    attributes: generateOrderedApplicationFields(formData, submitApplicationOrder),
   });
 
   return { data, error };

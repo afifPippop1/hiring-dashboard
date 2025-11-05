@@ -100,7 +100,7 @@ export function SignInForm() {
             Masuk
           </Button>
 
-          <Divider text="atau" />
+          {/* <Divider text="atau" />
 
           <Button
             variant="outline"
@@ -109,7 +109,7 @@ export function SignInForm() {
           >
             <GoogleLogo />
             Masuk dengan Google
-          </Button>
+          </Button> */}
         </div>
       </form>
     </FormProvider>

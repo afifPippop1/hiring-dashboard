@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { SignUpErrorMessage } from "./sign-up-error-message";
+import { Divider } from "@/components/ui/divider";
 
 export function SignUpForm() {
   const router = useRouter();
@@ -94,12 +95,7 @@ export function SignUpForm() {
             Daftar dengan email
           </Button>
 
-          {/* Divider */}
-          <div className="flex items-center gap-3">
-            <span className="flex-1 border-b border-neutral-60" />
-            <p className="text-sm text-neutral-60">or</p>
-            <span className="flex-1 border-b border-neutral-60" />
-          </div>
+          {/* <Divider text="atau" />
 
           <Button
             variant="outline"
@@ -108,7 +104,7 @@ export function SignUpForm() {
           >
             <GoogleLogo />
             Daftar dengan Google
-          </Button>
+          </Button> */}
         </div>
       </form>
     </FormProvider>

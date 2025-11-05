@@ -5,7 +5,9 @@ import {
 import { ApplicationFormBuilderSchema, ApplicationFormFields } from "../types";
 
 export class ApplicationFormConverter {
-  static toObject(data: ApplicationFormFields): ApplicationFormBuilderSchema {
+  static toApplicationFieldOptionObject(
+    data: ApplicationFormFields
+  ): ApplicationFormBuilderSchema {
     const form: ApplicationFormBuilderSchema = {
       ...APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE,
     };
@@ -30,7 +32,9 @@ export class ApplicationFormConverter {
     return form;
   }
 
-  static fromObject(data: ApplicationFormBuilderSchema): ApplicationFormFields {
+  static toOrderedList(
+    data: ApplicationFormBuilderSchema
+  ): ApplicationFormFields {
     const orderedKeys = Object.keys(
       APPLICATION_FORM_FIELDS_BUILDER_DEFAULT_VALUE
     ) as (keyof ApplicationFormBuilderSchema)[];

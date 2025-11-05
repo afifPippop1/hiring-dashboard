@@ -1,2 +1,2 @@
-export * from "./application-form-mapper";
+export * from "./generate-ordered-application-fields";
 export * from "./application-form-converter";
