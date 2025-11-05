@@ -41,7 +41,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(new URL(Routes.JobList, request.url));
   }
 
-  if (!user && request.nextUrl.pathname === Routes.JobList) {
+  if (!user && request.nextUrl.pathname.startsWith(Routes.JobList)) {
     return NextResponse.redirect(new URL(Routes.SignIn, request.url));
   }
 

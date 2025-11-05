@@ -44,7 +44,9 @@ export default function RootLayout({
         className={`${nunitoSans.variable} ${nunitoMono.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <main className="bg-neutral-20 h-svh w-svw">{children}</main>
+          <main className="bg-neutral-20 h-svh w-svw overflow-hidden">
+            {children}
+          </main>
           <Toaster />
         </Providers>
       </body>
