@@ -9,10 +9,12 @@ import { formatMinMaxSalary } from "@/lib/utils";
 import { Banknote, BriefcaseBusiness } from "lucide-react";
 
 import { usePublicJob } from "../../hooks/use-public-job";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function PublicJobDetail() {
   const { job } = usePublicJob();
-  if (!job) return <></>;
+
+  if (!job) return <Skeleton className="w-full h-full" />;
 
   return (
     <div className="bg-neutral-10 border border-neutral-40 p-6 rounded-md">
